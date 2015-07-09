@@ -1,0 +1,442 @@
+[
+	{
+		"Name" : "Alex van Winckel",
+		"GB" : "2"
+	},
+	{
+		"Name" : "Alexander Lukas",
+		"GB" : "2"
+	},
+	{
+		"Name" : "Ali Atwi",
+		"GB" : "2"
+	},
+	{
+		"Name" : "Andreas Otten",
+		"GB" : "2"
+	},
+	{
+		"Name" : "Anke Lewien",
+		"GB" : "2"
+	},
+	{
+		"Name" : "Annelie Schumacher",
+		"GB" : "2"
+	},
+	{
+		"Name" : "Annika Rath",
+		"GB" : "1234568"
+	},
+	{
+		"Name" : "Axel Bicker",
+		"GB" : "2"
+	},
+	{
+		"Name" : "Bastian Klinkenberg",
+		"GB" : "2"
+	},
+	{
+		"Name" : "Benedikt Engels",
+		"GB" : "2"
+	},
+	{
+		"Name" : "Bernhard Meinecke",
+		"GB" : "2"
+	},
+	{
+		"Name" : "Bernhard Meinecke",
+		"GB" : "2"
+	},
+	{
+		"Name" : "Bo-Min Kang",
+		"GB" : "2"
+	},
+	{
+		"Name" : "Carolin Kluge",
+		"GB" : "2"
+	},
+	{
+		"Name" : "Christian Friedel",
+		"GB" : "2"
+	},
+	{
+		"Name" : "Christoph Küpper",
+		"GB" : "2"
+	},
+	{
+		"Name" : "Christophe Denis",
+		"GB" : "2"
+	},
+	{
+		"Name" : "Claudia Oßmann",
+		"GB" : "2"
+	},
+	{
+		"Name" : "David Rovinsky",
+		"GB" : "2"
+	},
+	{
+		"Name" : "Debora Creusen",
+		"GB" : "26"
+	},
+	{
+		"Name" : "Dietlinde Giboni",
+		"GB" : "28"
+	},
+	{
+		"Name" : "Dindar Erenoglu",
+		"GB" : "2"
+	},
+	{
+		"Name" : "Dirk Bonné",
+		"GB" : "2"
+	},
+	{
+		"Name" : "Dirk Ossenberg-Engels",
+		"GB" : "2"
+	},
+	{
+		"Name" : "Dirk Schlemper",
+		"GB" : "2"
+	},
+	{
+		"Name" : "Dirk Sorges",
+		"GB" : "2"
+	},
+	{
+		"Name" : "Dominik Puhl",
+		"GB" : "2"
+	},
+	{
+		"Name" : "Dr. Christoph Seifert",
+		"GB" : "2"
+	},
+	{
+		"Name" : "Dr. Stefan Droste",
+		"GB" : "28"
+	},
+	{
+		"Name" : "Ekrem Tastan",
+		"GB" : "2"
+	},
+	{
+		"Name" : "Enrico Panascia",
+		"GB" : "2"
+	},
+	{
+		"Name" : "Eva Savelsberg",
+		"GB" : "2"
+	},
+	{
+		"Name" : "Florent Bernard",
+		"GB" : "2"
+	},
+	{
+		"Name" : "Florent Bernard",
+		"GB" : "2"
+	},
+	{
+		"Name" : "Florian Falter",
+		"GB" : "2"
+	},
+	{
+		"Name" : "Florian Hermey",
+		"GB" : "2"
+	},
+	{
+		"Name" : "Florian Schaar",
+		"GB" : "2"
+	},
+	{
+		"Name" : "Frank Fleischhack",
+		"GB" : "2"
+	},
+	{
+		"Name" : "Frank Schneider",
+		"GB" : "2"
+	},
+	{
+		"Name" : "Frank Winsemann",
+		"GB" : "2"
+	},
+	{
+		"Name" : "Guy Heugna",
+		"GB" : "2"
+	},
+	{
+		"Name" : "Hechard Services Ltd. Richard Williams",
+		"GB" : "2"
+	},
+	{
+		"Name" : "Hein Lentjes",
+		"GB" : "2"
+	},
+	{
+		"Name" : "Henrik Olberding",
+		"GB" : "2"
+	},
+	{
+		"Name" : "Ingo Marko",
+		"GB" : "2"
+	},
+	{
+		"Name" : "Isabelle Förster",
+		"GB" : "2"
+	},
+	{
+		"Name" : "Jan Karger",
+		"GB" : "23"
+	},
+	{
+		"Name" : "Jean-Marie Bücken",
+		"GB" : "2"
+	},
+	{
+		"Name" : "Jennifer Stead",
+		"GB" : "2"
+	},
+	{
+		"Name" : "Jens Bethkowsky",
+		"GB" : "2"
+	},
+	{
+		"Name" : "Julia Lenzen",
+		"GB" : "2"
+	},
+	{
+		"Name" : "Julia Paul",
+		"GB" : "2"
+	},
+	{
+		"Name" : "Julia Weynands",
+		"GB" : "2"
+	},
+	{
+		"Name" : "Julien Drevon, Frankreich",
+		"GB" : "2"
+	},
+	{
+		"Name" : "Jörg Toborg",
+		"GB" : "2"
+	},
+	{
+		"Name" : "Kai Schmitz",
+		"GB" : "2"
+	},
+	{
+		"Name" : "Karin Muller",
+		"GB" : "2"
+	},
+	{
+		"Name" : "Karsten Horn",
+		"GB" : "12"
+	},
+	{
+		"Name" : "Karsten Schumacher",
+		"GB" : "2"
+	},
+	{
+		"Name" : "Katja Krämer",
+		"GB" : "2"
+	},
+	{
+		"Name" : "Kirstin Podeschwik",
+		"GB" : "2"
+	},
+	{
+		"Name" : "Lukas Oßmann",
+		"GB" : "2"
+	},
+	{
+		"Name" : "Lutz Felsberg",
+		"GB" : "2"
+	},
+	{
+		"Name" : "Marcus Heinen",
+		"GB" : "2"
+	},
+	{
+		"Name" : "Martin Noy",
+		"GB" : "2"
+	},
+	{
+		"Name" : "Matthias Steinert",
+		"GB" : "2"
+	},
+	{
+		"Name" : "Maxime Laschet",
+		"GB" : "2"
+	},
+	{
+		"Name" : "Maximilian Florkowski",
+		"GB" : "2"
+	},
+	{
+		"Name" : "Mehdi Kraiem",
+		"GB" : "2"
+	},
+	{
+		"Name" : "Michael Ludwig",
+		"GB" : "2"
+	},
+	{
+		"Name" : "Nathalie Draht, geb. Heuer",
+		"GB" : "2"
+	},
+	{
+		"Name" : "Olaf von Dühren",
+		"GB" : "2"
+	},
+	{
+		"Name" : "Olga Frenkel",
+		"GB" : "2"
+	},
+	{
+		"Name" : "Paul Flachskampf",
+		"GB" : "2"
+	},
+	{
+		"Name" : "Paul Mangartz",
+		"GB" : "2"
+	},
+	{
+		"Name" : "Peng Deng, China",
+		"GB" : "2"
+	},
+	{
+		"Name" : "Peter Eisenlohr",
+		"GB" : "2"
+	},
+	{
+		"Name" : "Peter Schaefer",
+		"GB" : "2"
+	},
+	{
+		"Name" : "Philipp Caratiola",
+		"GB" : "2"
+	},
+	{
+		"Name" : "Rafael Michalski",
+		"GB" : "2"
+	},
+	{
+		"Name" : "Rafael Michalski",
+		"GB" : "2"
+	},
+	{
+		"Name" : "Rafael Velásquez",
+		"GB" : "2"
+	},
+	{
+		"Name" : "Rausch Systems GmbH, Klemens Rausch",
+		"GB" : "2"
+	},
+	{
+		"Name" : "Sabine Lüttgen",
+		"GB" : "2"
+	},
+	{
+		"Name" : "Sebastian Brand",
+		"GB" : "28"
+	},
+	{
+		"Name" : "Sebastian Krämer",
+		"GB" : "2"
+	},
+	{
+		"Name" : "Silke Junge",
+		"GB" : "2"
+	},
+	{
+		"Name" : "Simon Draht",
+		"GB" : "2"
+	},
+	{
+		"Name" : "Simone Recker",
+		"GB" : "26"
+	},
+	{
+		"Name" : "Sonja Bausch",
+		"GB" : "2"
+	},
+	{
+		"Name" : "SRH Consulting, Stig Reenberg Hansen ",
+		"GB" : "2"
+	},
+	{
+		"Name" : "Stefan Rupp",
+		"GB" : "2"
+	},
+	{
+		"Name" : "Stephan Meyer",
+		"GB" : "2"
+	},
+	{
+		"Name" : "Stephan Peters",
+		"GB" : "2"
+	},
+	{
+		"Name" : "Test",
+		"GB" : "2"
+	},
+	{
+		"Name" : "Thomas Bergmans",
+		"GB" : "2"
+	},
+	{
+		"Name" : "Thomas Gorgels",
+		"GB" : "2"
+	},
+	{
+		"Name" : "Thorsten Becker",
+		"GB" : "2"
+	},
+	{
+		"Name" : "Tobias Ernst",
+		"GB" : "2"
+	},
+	{
+		"Name" : "Tobias Jansen",
+		"GB" : "2"
+	},
+	{
+		"Name" : "Tobias Vaegs",
+		"GB" : "2"
+	},
+	{
+		"Name" : "Torsten Bolz",
+		"GB" : "2"
+	},
+	{
+		"Name" : "Ulrich Dorndorf",
+		"GB" : "28"
+	},
+	{
+		"Name" : "Ute Schiller",
+		"GB" : "2"
+	},
+	{
+		"Name" : "Verónica de Diego Coppen",
+		"GB" : "2"
+	},
+	{
+		"Name" : "Werner Schmitz",
+		"GB" : "2"
+	},
+	{
+		"Name" : "Wolfgang Schommertz",
+		"GB" : "2"
+	},
+	{
+		"Name" : "Yan Chen",
+		"GB" : "2"
+	},
+	{
+		"Name" : "Yoon-Soo Hwang",
+		"GB" : "2"
+	},
+	{
+		"Name" : "Zeynep Yavas",
+		"GB" : "2"
+	}
+]

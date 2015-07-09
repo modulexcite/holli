@@ -1,0 +1,21 @@
+# Meteor packages used by this project, one per line.
+# Check this file (and the other files in this directory) into your repository.
+#
+# 'meteor add' and 'meteor remove' will edit this file for you,
+# but you can also edit it by hand.
+
+meteor-platform
+urigo:angular
+stylus
+coffeescript
+angularui:angular-ui-router
+mquandalle:jade
+twbs:bootstrap
+civilframe:angular-jade
+mbenford:ng-tags-input
+accounts-password
+ian:accounts-ui-bootstrap-3
+autopublish
+zimme:collection-timestampable
+matb33:collection-hooks
+stevezhu:lodash
