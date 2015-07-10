@@ -1,6 +1,6 @@
 # meteor accounts config
 Accounts.ui.config
-  passwordSignupFields: 'USERNAME_ONLY'
+	passwordSignupFields: 'USERNAME_ONLY'
 
 # angular
 app = angular.module 'app', ['angular-meteor', 'ui.router', 'ui.bootstrap']
@@ -43,17 +43,19 @@ app.run ['$rootScope', '$state', ($rootScope, $state) ->
 ]
 
 app.controller 'teamsConfigCtrl', ['$scope', '$meteor', '$window', ($scope, $meteor, $window) ->
-	$scope.employees = $meteor.collection(share.Employees)
-	$scope.teams = $meteor.collection(share.Teams)
-	if $scope.teams.length > 0
-		$scope.currentTeam = $scope.teams[0]
-
 	$scope.selectTeam = (team) ->
 		console.log "select team: #{team.name}"
 		for t in $scope.teams
 			t.selected = false
 		team.selected = true
 		$scope.currentTeam = team
+
+
+	$scope.employees = $meteor.collection(share.Employees)
+	$scope.teams = $meteor.collection(share.Teams)
+	if $scope.teams.length > 0
+		$scope.selectTeam($scope.teams[0])
+
 	
 	$scope.deleteTeam = (team) ->
 		if $window.confirm 'Wirklich löschen?'
@@ -68,16 +70,53 @@ app.controller 'teamsConfigCtrl', ['$scope', '$meteor', '$window', ($scope, $met
 			undersigners: []
 			members: []
 
-	$scope.addUndersigner = (newundersigner) ->
-		console.log "add new undersigner: #{newundersigner.name}"
-		if $scope.currentTeam
-			$scope.currentTeam.undersigners.push newundersigner
-
 	$scope.addMember = (newmember) ->
 		console.log "add new member: #{newmember.name}"
 		if $scope.currentTeam
-			$scope.currentTeam.members.push newmember
+			$scope.currentTeam.members.push 
+				_id: newmember._id
+				name: newmember.name
+		$scope.newMember = null
+
+	$scope.removeMember = (member) ->
+		console.log "remove member: #{member.name}"
+		if $scope.currentTeam
+			_remove $scope.currentTeam.members, member
 ]
 
 app.controller 'memberDashboardCtrl', ['$scope', '$meteor', '$window', ($scope, $meteor, $window) ->
+	$scope.member = _.find $meteor.collection(share.Employees), (e) -> e.name == "Sebastian Krämer"
+	$scope.teams = _.filter($meteor.collection(share.Teams), (t) -> _.some(t.members, (m) -> m._id==$scope.member._id))
+	$scope.minDate = new Date()
+	$scope.maxDate = new Date(2020, 12, 31)
+	$scope.format = 'dd.MM.yyyy'
+	$scope.maxPrio = 3
+	$scope.dateOptions =
+		formatYear: 'yy'
+		startingDay: 1
+
+	$scope.hoveringOver = (value) ->
+		$scope.overStar = value
+
+	$scope.openFrom = ($event) ->
+		$event.preventDefault()
+		$event.stopPropagation()
+		$scope.openedFrom = true
+
+	$scope.openTo = ($event) ->
+		$event.preventDefault()
+		$event.stopPropagation()
+		$scope.openedTo = true
+
+	$scope.createRequest = () ->
+		$scope.member.vacations.push
+			name: $scope.newRequestName
+			from: $scope.vacationFrom
+			to: $scope.vacationTo
+			prio: $scope.prio
+			state: "pending"
+		$scope.newRequestName = ""
+		$scope.vacationFrom = null
+		$scope.vacationTo = null
+		$scope.prio = null
 ]

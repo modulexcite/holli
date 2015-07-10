@@ -1,0 +1,66 @@
+.container-fluid
+	.row
+		.col-md-4
+			.panel.panel-primary
+				.panel-heading My Teams
+				.panel-body
+					ul.teams.list-unstyled
+						li.team(ng-repeat="team in teams", ng-class="{'selected':team.selected}", ng-click="selectTeam(team)")
+							strong.team-name {{team.name}}
+							.team-lead {{team.lead.name}}
+
+		.col-md-4
+			.panel.panel-primary
+				.panel-heading My pending requests
+				.panel-body
+					ul.vacations.list-unstyled
+						li.vacation(ng-repeat="vacation in member.vacations | filter : { state: 'pending'}")
+							strong.vacation-name {{vacation.name}}
+							.vacation-fromto {{vacation.from | date : format}} - {{vacation.to | date : format}}
+							.vacation-prio 
+								rating(ng-model="vacation.prio", max="maxPrio", readonly)
+
+		.col-md-4
+			.panel.panel-primary
+				.panel-heading My successful requests
+				.panel-body
+					ul.vacations.list-unstyled
+						li.vacation(ng-repeat="vacation in member.vacations | filter : { state: 'confirmed'}")
+							strong.vacation-name {{vacation.name}}
+							.vacation-fromto {{vacation.from | date : format}} - {{vacation.to | date : format}}
+							.vacation-prio 
+								rating(ng-model="vacation.prio", max="maxPrio", readonly)
+							
+
+	.row
+		.col-md-12
+			.panel.panel-info
+				.panel-heading New Request
+				.panel-body
+					.col-md-3
+						.form-group
+							label(for='name') Name 
+							input#name.form-control(type='text', placeholder='Name', ng-model="newRequestName") 
+					.col-md-3
+						.form-group
+							label(for='from') Start 
+							.input-group
+								input#from.form-control(type="text", datepicker-popup="{{format}}", ng-model="vacationFrom", is-open="openedFrom", min-date="minDate", max-date="maxDate", datepicker-options="dateOptions", close-text="Close")
+								span.input-group-btn
+									button.btn.btn-default(ng-click="openFrom($event)")
+										i.glyphicon.glyphicon-calendar
+					.col-md-3
+						.form-group
+							label(for='to') End
+							.input-group
+								input#to.form-control(type="text", datepicker-popup="{{format}}", ng-model="vacationTo", is-open="openedTo", min-date="minDate", max-date="maxDate", datepicker-options="dateOptions", close-text="Close")
+								span.input-group-btn
+									button.btn.btn-default(ng-click="openTo($event)")
+										i.glyphicon.glyphicon-calendar
+					.col-md-3
+						.form-group
+							label(for='prio') Priority 
+							rating#prio.form-control(ng-model="prio", max="maxPrio", on-hover="hoveringOver(value)", on-leave="overStar = null")
+					button.btn.btn-primary.form-control(ng-click="createRequest()")
+						span.glyphicon.glyphicon-plus
+
