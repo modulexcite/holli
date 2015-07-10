@@ -3,7 +3,7 @@ Accounts.ui.config
   passwordSignupFields: 'USERNAME_ONLY'
 
 # angular
-app = angular.module 'app', ['angular-meteor', 'ui.router', 'ngTagsInput']
+app = angular.module 'app', ['angular-meteor', 'ui.router', 'ui.bootstrap']
 
 # routes
 userResolve = 
@@ -14,41 +14,26 @@ userResolve =
 
 app.config ['$stateProvider', '$urlRouterProvider', '$locationProvider', ($stateProvider, $urlRouterProvider, $locationProvider) ->
 	$stateProvider
-		.state 'alle',
-			url: '/'
-			templateUrl: 'client/jade/alle.html'
-			controller: 'alleCtrl'
+		.state 'teams-config',
+			url: '/teams-config'
+			templateUrl: 'client/jade/teams-config.html'
+			controller: 'teamsConfigCtrl'
 			resolve: userResolve
-		.state 'archived',
-			url: '/archived'
-			templateUrl: 'client/jade/alle.html'
-			controller: 'archivedCtrl'
-			resolve: userResolve
-		.state 'neu',
-			url: '/neu'
-			templateUrl: 'client/jade/eine.html'
-			controller: 'neuCtrl'
-			resolve: userResolve
-		.state 'eine',
-			url: '/eine/:id'
-			templateUrl: 'client/jade/eine.html'
-			controller: 'eineCtrl'
-			resolve: userResolve
-		.state 'tags',
-			url: '/tags'
-			templateUrl: 'client/jade/tags.html'
-			controller: 'tagsCtrl'
+		.state 'member-dashboard',
+			url: '/member-dashboard'
+			templateUrl: 'client/jade/member-dashboard.html'
+			controller: 'memberDashboardCtrl'
 			resolve: userResolve
 		.state 'login',
 			url: '/login'
 			templateUrl: 'client/jade/login.html'
 			
-	$urlRouterProvider.otherwise '/'
+	$urlRouterProvider.otherwise '/teams-config'
 	$locationProvider.html5Mode true
 ]
 
 app.run ['$rootScope', '$state', ($rootScope, $state) ->
-	Accounts.onLogin () -> $state.go 'alle'
+	Accounts.onLogin () -> $state.go 'member-dashboard'
 	accountsUIBootstrap3.logoutCallback = () -> $state.go 'login'
 	$rootScope.$on '$stateChangeError', (event, toState, toParams, fromState, fromParams, error) ->
 		# We can catch the error thrown when the $requireUser promise is rejected
@@ -57,47 +42,42 @@ app.run ['$rootScope', '$state', ($rootScope, $state) ->
 			$state.go 'login'
 ]
 
-app.controller 'neuCtrl', ['$scope', '$meteor', ($scope, $meteor) ->
-	$scope.isNew = true
-	$scope.family = {}
-	$scope.save = () ->
-		$meteor.collection(share.Families).save $scope.family
-]
+app.controller 'teamsConfigCtrl', ['$scope', '$meteor', '$window', ($scope, $meteor, $window) ->
+	$scope.employees = $meteor.collection(share.Employees)
+	$scope.teams = $meteor.collection(share.Teams)
+	if $scope.teams.length > 0
+		$scope.currentTeam = $scope.teams[0]
 
-app.controller 'alleCtrl', ['$scope', '$meteor', '$window', ($scope, $meteor, $window) ->
-	$scope.sortType = 'mama.nachname'
-	$scope.showArchived = false
-	$scope.families = $meteor.collection(share.Families)
-	$scope.deleteFamily = (family) ->
-		if $window.confirm 'Wirklich archivieren?'
+	$scope.selectTeam = (team) ->
+		console.log "select team: #{team.name}"
+		for t in $scope.teams
+			t.selected = false
+		team.selected = true
+		$scope.currentTeam = team
+	
+	$scope.deleteTeam = (team) ->
+		if $window.confirm 'Wirklich löschen?'
 			console.log "archive id: #{family._id}"
-			family.archived = true
+
+	$scope.createTeam = (teamname, teamlead) ->
+		$meteor.collection(share.Teams).save
+			name: teamname
+			lead: 
+				_id: teamlead._id
+				name: teamlead.name
+			undersigners: []
+			members: []
+
+	$scope.addUndersigner = (newundersigner) ->
+		console.log "add new undersigner: #{newundersigner.name}"
+		if $scope.currentTeam
+			$scope.currentTeam.undersigners.push newundersigner
+
+	$scope.addMember = (newmember) ->
+		console.log "add new member: #{newmember.name}"
+		if $scope.currentTeam
+			$scope.currentTeam.members.push newmember
 ]
 
-app.controller 'archivedCtrl', ['$scope', '$meteor', '$window', ($scope, $meteor, $window) ->
-	$scope.sortType = 'mama.nachname'
-	$scope.showArchived = true
-	$scope.families = $meteor.collection(share.Families)
-	$scope.undeleteFamily = (family) ->
-		if $window.confirm 'Wirklich wiederherstellen?'
-			console.log "unarchive id: #{family._id}"
-			family.archived = false
-]
-
-app.controller 'tagsCtrl', ['$scope', '$meteor', ($scope, $meteor) ->
-	$scope.tags = $meteor.collection(share.Tags)
-	$scope.deleteTag = (tag) ->
-		console.log "delete id: #{tag._id}"
-		$scope.tags.remove tag
-	$scope.addTag = (tagName) ->
-		$scope.tags.push {name: tagName}
-		$scope.newName = null
-]
-
-app.controller 'eineCtrl', ['$scope', '$meteor', '$stateParams', ($scope, $meteor, $stateParams) ->
-	$scope.family = $meteor.object(share.Families, $stateParams.id)
-	$scope.tags = $meteor.collection(share.Tags)
-	$scope.loadTags = (query) ->
-		# filter
-		$scope.tags
+app.controller 'memberDashboardCtrl', ['$scope', '$meteor', '$window', ($scope, $meteor, $window) ->
 ]

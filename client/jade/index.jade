@@ -1,6 +1,6 @@
 head
 	base(href="/")
-	title KiTa Kleine Strolche Familien
+	title ivo - internal vacation organizer
 	meta(name="viewport", content="width=device-width, initial-scale=1")
 
 body(ng-app="app")
@@ -13,26 +13,14 @@ body(ng-app="app")
 					span.icon-bar
 					span.icon-bar
 					span.icon-bar
-				a.navbar-brand KiTa Familien
+				a.navbar-brand ivo
 
 			#navbar-collapse-part.collapse.navbar-collapse
 				ul.nav.navbar-nav(ng-show="currentUser")
 					li(ui-sref-active="active")
-						a(ui-sref='alle')
+						a(ui-sref='teams-config')
 							span 
-							| Alle
-					li(ui-sref-active="active")
-						a(ui-sref='archived')
-							span 
-							| Archiv
-					li(ui-sref-active="active")
-						a(ui-sref='neu')
-							span  
-							| Neue Familie				
-					li(ui-sref-active="active")
-						a(ui-sref='tags')
-							span  
-							| Tags
+							| Teams
 				ul.nav.navbar-nav.navbar-right
 					+loginButtons
 

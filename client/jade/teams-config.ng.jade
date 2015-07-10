@@ -1,0 +1,51 @@
+.container-fluid
+	.row
+		.col-md-4
+			.panel.panel-primary
+				.panel-heading Teams
+				.panel-body
+					h3 Teams
+					ul.list-unstyled
+						li(ng-repeat="team in teams", ng-class="{'selected':team.selected}", ng-click="selectTeam(team)")
+							.team
+								.team-name {{team.name}}
+								.team-lead {{team.lead.name}}
+
+					h3 New Team
+					.form-group
+						label(for='name') Name 
+						input#name.form-control(type='text', placeholder='Name', ng-model="newteamname") 
+					.form-group
+						label(for='lead') Lead 
+						input#lead.form-control(type='text', placeholder='Lead', ng-model="newteamlead", typeahead="lead as lead.name for lead in employees | filter:$viewValue | limitTo:10")
+					button.btn.btn-primary.form-control(ng-click="createTeam(newteamname, newteamlead)")
+						span.glyphicon.glyphicon-plus
+
+
+		.col-md-8
+			.panel.panel-primary
+				.panel-heading Members
+				.panel-body
+					h3 Undersigner
+					ul.list-unstyled
+						li(ng-repeat="undersigner in currentTeam.undersigners")
+							span {{undersigner.name}}
+							button.btn.btn-danger(ng-click="removeEmployee(member)")
+								span.glyphicon.glyphicon-trash
+					.col-md-10
+						input.form-control(type="text", ng-model="newUndersigner", typeahead="undersigner as undersigner.name for undersigner in employees | filter:$viewValue | limitTo:10", placeholder="Neuer Undersigner...")
+					.col-md-2
+						button.btn.btn-primary.btn-sm.form-control(ng-click="addUndersigner(newUndersigner)")
+							span.glyphicon.glyphicon-plus
+
+					h3 Members
+					ul.list-unstyled
+						li(ng-repeat="member in currentTeam.members")
+							span {{member.name}}
+							button.btn.btn-danger(ng-click="removeEmployee(member)")
+								span.glyphicon.glyphicon-trash
+					.col-md-10
+						input.form-control(type="text", ng-model="newMember", typeahead="member as member.name for member in employees | filter:$viewValue | limitTo:10", placeholder="Neues Teammitglied...")
+					.col-md-2
+						button.btn.btn-primary.btn-sm.form-control(ng-click="addMember(newMember)")
+							span.glyphicon.glyphicon-plus
