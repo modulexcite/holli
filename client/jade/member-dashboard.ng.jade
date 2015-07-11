@@ -5,7 +5,7 @@
 				.panel-heading My Teams
 				.panel-body
 					ul.teams.list-unstyled
-						li.team(ng-repeat="team in teams", ng-class="{'selected':team.selected}", ng-click="selectTeam(team)")
+						li.myteam(ng-repeat="team in teams")
 							strong.team-name {{team.name}}
 							.team-lead {{team.lead.name}}
 

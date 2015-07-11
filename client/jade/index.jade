@@ -25,6 +25,10 @@ body(ng-app="app")
 						a(ui-sref='teams-config')
 							span 
 							| Teams
+					li(ui-sref-active="active")
+						a(ui-sref='team-lead')
+							span 
+							| Team-Lead
 				ul.nav.navbar-nav.navbar-right
 					+loginButtons
 

@@ -24,6 +24,11 @@ app.config ['$stateProvider', '$urlRouterProvider', '$locationProvider', ($state
 			templateUrl: 'client/jade/member-dashboard.html'
 			controller: 'memberDashboardCtrl'
 			resolve: userResolve
+		.state 'team-lead',
+			url: '/team-lead'
+			templateUrl: 'client/jade/team-lead.html'
+			controller: 'teamLeadCtrl'
+			resolve: userResolve
 		.state 'login',
 			url: '/login'
 			templateUrl: 'client/jade/login.html'
@@ -119,4 +124,18 @@ app.controller 'memberDashboardCtrl', ['$scope', '$meteor', '$window', ($scope, 
 		$scope.vacationFrom = null
 		$scope.vacationTo = null
 		$scope.prio = null
+]
+
+app.controller 'teamLeadCtrl', ['$scope', '$meteor', '$window', ($scope, $meteor, $window) ->
+	employees = $meteor.collection(share.Employees)
+	$scope.member = _.find employees, (e) -> e.name == "Olaf von Dühren"
+	$scope.teams = _.filter($meteor.collection(share.Teams), (t) -> t.lead._id == $scope.member._id)
+	$scope.requests = []
+	for t in $scope.teams
+		for m in t.members
+			e = _.find employees, (e) -> e._id == m._id
+			console.log "found my team member: #{e.name}"
+			for r in _.filter(e.vacations, (v) -> v.state == "pending")
+				r.member = e
+				$scope.requests.push r
 ]
