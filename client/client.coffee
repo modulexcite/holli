@@ -48,6 +48,8 @@ app.run ['$rootScope', '$state', ($rootScope, $state) ->
 ]
 
 app.controller 'teamsConfigCtrl', ['$scope', '$meteor', '$window', ($scope, $meteor, $window) ->
+	registerWatch()
+
 	$scope.selectTeam = (team) ->
 		console.log "select team: #{team.name}"
 		for t in $scope.teams
@@ -56,18 +58,26 @@ app.controller 'teamsConfigCtrl', ['$scope', '$meteor', '$window', ($scope, $met
 		$scope.currentTeam = team
 
 
-	$scope.employees = $meteor.collection(share.Employees)
-	$scope.teams = $meteor.collection(share.Teams)
+	$scope.employees = $scope.$meteorCollection(share.Employees)
+	$scope.teams = $scope.$meteorCollection(share.Teams)
+	console.log $scope.teams
 	if $scope.teams.length > 0
 		$scope.selectTeam($scope.teams[0])
 
-	
+	registerWatch = () ->
+		$scope.watchTeamName = $scope.$watch 'newteamname', ((oldValue, newValue) ->
+				if not _.isEqual oldValue, newValue
+					# check for name existance
+					f = $scope.$meteorCollection(() -> share.Teams.findOne({name: $scope.newValue}))
+					$scope.teamNameNotUnique = f?
+			), true
+
 	$scope.deleteTeam = (team) ->
 		if $window.confirm 'Wirklich löschen?'
 			console.log "archive id: #{family._id}"
 
 	$scope.createTeam = (teamname, teamlead) ->
-		$meteor.collection(share.Teams).save
+		$scope.$meteorCollection(share.Teams).save
 			name: teamname
 			lead: 
 				_id: teamlead._id
@@ -90,8 +100,10 @@ app.controller 'teamsConfigCtrl', ['$scope', '$meteor', '$window', ($scope, $met
 ]
 
 app.controller 'memberDashboardCtrl', ['$scope', '$meteor', '$window', ($scope, $meteor, $window) ->
-	$scope.member = _.find $meteor.collection(share.Employees), (e) -> e.name == "Sebastian Krämer"
-	$scope.teams = _.filter($meteor.collection(share.Teams), (t) -> _.some(t.members, (m) -> m._id==$scope.member._id))
+	$scope.teams = _.filter($scope.$meteorCollection(share.Teams), (t) -> _.some(t.members, (m) -> m._id==$scope.member._id))
+	$scope.member = $scope.$meteorCollection(() -> share.Employees.findOne({name: "Sebastian Krämer"}))
+	console.log $scope.member
+	#$scope.member = _.find $scope.$meteorCollection(share.Employees), (e) -> e.name == "Sebastian Krämer"
 	$scope.minDate = new Date()
 	$scope.maxDate = new Date(2020, 12, 31)
 	$scope.format = 'dd.MM.yyyy'
@@ -127,9 +139,9 @@ app.controller 'memberDashboardCtrl', ['$scope', '$meteor', '$window', ($scope, 
 ]
 
 app.controller 'teamLeadCtrl', ['$scope', '$meteor', '$window', ($scope, $meteor, $window) ->
-	employees = $meteor.collection(share.Employees)
+	employees = $scope.$meteorCollection(share.Employees)
 	$scope.member = _.find employees, (e) -> e.name == "Olaf von Dühren"
-	$scope.teams = _.filter($meteor.collection(share.Teams), (t) -> t.lead._id == $scope.member._id)
+	$scope.teams = _.filter($scope.$meteorCollection(share.Teams), (t) -> t.lead._id == $scope.member._id)
 	$scope.requests = []
 	for t in $scope.teams
 		for m in t.members
