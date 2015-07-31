@@ -14,7 +14,7 @@
 				.panel-heading My pending requests
 				.panel-body
 					ul.vacations.list-unstyled
-						li.vacation(ng-repeat="vacation in member.vacations | filter : { state: 'pending'}")
+						li.vacation(ng-repeat="vacation in requests | filter : { state: 'pending'}")
 							strong.vacation-name {{vacation.name}}
 							.vacation-fromto {{vacation.from | date : format}} - {{vacation.to | date : format}}
 							.vacation-prio 
@@ -25,7 +25,7 @@
 				.panel-heading My successful requests
 				.panel-body
 					ul.vacations.list-unstyled
-						li.vacation-accepted(ng-repeat="vacation in member.vacations | filter : { state: 'accepted'}")
+						li.vacation-accepted(ng-repeat="vacation in requests | filter : { state: 'accepted'}")
 							strong.vacation-name {{vacation.name}}
 							.vacation-fromto {{vacation.from | date : format}} - {{vacation.to | date : format}}
 							.vacation-prio 
@@ -36,7 +36,7 @@
 				.panel-heading My denied requests
 				.panel-body
 					ul.vacations.list-unstyled
-						li.vacation-denied(ng-repeat="vacation in member.vacations | filter : { state: 'denied'}")
+						li.vacation-denied(ng-repeat="vacation in requests | filter : { state: 'denied'}")
 							strong.vacation-name {{vacation.name}}
 							.vacation-fromto {{vacation.from | date : format}} - {{vacation.to | date : format}}
 							.vacation-prio 
@@ -72,7 +72,7 @@
 						.form-group
 							label(for='prio') Priority 
 							rating#prio.form-control(ng-model="prio", max="maxPrio", on-hover="hoveringOver(value)", on-leave="overStar = null")
-					button.btn.btn-primary.form-control(ng-click="createRequest()")
+					button.btn.btn-primary.form-control(ng-click="createRequest()", ng-disabled="!newRequestName")
 						span.glyphicon.glyphicon-plus
 
 

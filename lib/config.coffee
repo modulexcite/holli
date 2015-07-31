@@ -5,10 +5,12 @@ Accounts.config
 # create collections
 share.Employees = new Mongo.Collection 'employees'
 share.Teams = new Mongo.Collection 'teams'
+share.Requests = new Mongo.Collection 'requests'
 
 # add created, updated etc fields
 share.Employees.attachBehaviour 'timestampable'
 share.Teams.attachBehaviour 'timestampable'
+share.Requests.attachBehaviour 'timestampable'
 
 # user access config
 allowOnlyLoginUsers = 
@@ -21,3 +23,4 @@ allowOnlyLoginUsers =
 
 share.Employees.allow allowOnlyLoginUsers
 share.Teams.allow allowOnlyLoginUsers
+share.Requests.allow allowOnlyLoginUsers

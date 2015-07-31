@@ -13,7 +13,7 @@
 				.panel-heading My pending requests
 				.panel-body
 					ul.vacations.list-unstyled
-						li.vacation(ng-repeat="vacation in requests")
+						li.vacation(ng-repeat="vacation in requests | filter : { state: 'pending'}")
 							strong.vacation-name {{vacation.member.name}}
 							i.fa.fa-thumbs-o-down.pull-right(ng-click="denyRequest(vacation)")
 							i.fa.fa-thumbs-o-up.pull-right(ng-click="acceptRequest(vacation)")
@@ -26,4 +26,4 @@
 			.panel.panel-primary
 				.panel-heading Team schedules
 				.panel-body
-					h1 todo
+					#teamCalendar.calendar(ui-calendar="uiConfig.calendar", ng-model="requestEventSources", calendar="teamCalendar")
