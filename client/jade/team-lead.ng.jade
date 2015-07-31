@@ -13,12 +13,12 @@
 				.panel-heading My pending requests
 				.panel-body
 					ul.vacations.list-unstyled
-						li.vacation(ng-repeat="vacation in requests")
+						li.vacation(ng-repeat="vacation in requests | filter : { state: 'pending'}")
 							strong.vacation-name {{vacation.member.name}}
-							span.glyphicons.glyphicons-thumbs-down.pull-right
-							span.glyphicons.glyphicons-thumbs-up.pull-right
+							i.fa.fa-thumbs-o-down.pull-right(ng-click="denyRequest(vacation)")
+							i.fa.fa-thumbs-o-up.pull-right(ng-click="acceptRequest(vacation)")
 							.vacation-name {{vacation.name}}
-							.vacation-fromto {{vacation.from | date : format}} - {{vacation.to | date : format}}
+							.vacation-fromto {{vacation.from | date : format}} - {{vacation.to | date : format}} ({{ requestDuration(vacation)}} days)
 							.vacation-prio 
 								rating(ng-model="vacation.prio", max="maxPrio", readonly)
 
@@ -26,4 +26,4 @@
 			.panel.panel-primary
 				.panel-heading Team schedules
 				.panel-body
-					h1 todo
+					#teamCalendar.calendar(ui-calendar="uiConfig.calendar", ng-model="requestEventSources", calendar="teamCalendar")

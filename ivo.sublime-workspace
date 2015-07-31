@@ -4,6 +4,7 @@
 		"selected_items":
 		[
 			[
+<<<<<<< HEAD
 				"re",
 				"requests"
 			],
@@ -58,6 +59,10 @@
 			[
 				"all",
 				"allowOnlyLoginUsers"
+=======
+				"new",
+				"newValue"
+>>>>>>> origin/master
 			],
 			[
 				"fix",
@@ -336,6 +341,7 @@
 	"buffers":
 	[
 		{
+<<<<<<< HEAD
 			"file": "server/server.coffee",
 			"settings":
 			{
@@ -365,6 +371,16 @@
 			{
 				"buffer_size": 4282,
 				"line_ending": "Unix"
+=======
+			"contents": "# meteor accounts config\nAccounts.ui.config\n	passwordSignupFields: 'USERNAME_ONLY'\n\n# angular\napp = angular.module 'app', ['angular-meteor', 'ui.router', 'ui.bootstrap']\n\n# routes\nuserResolve = \n				\"currentUser\": [\n					\"$meteor\", ($meteor) ->\n						$meteor.requireUser()\n				]\n\napp.config ['$stateProvider', '$urlRouterProvider', '$locationProvider', ($stateProvider, $urlRouterProvider, $locationProvider) ->\n	$stateProvider\n		.state 'teams-config',\n			url: '/teams-config'\n			templateUrl: 'client/jade/teams-config.html'\n			controller: 'teamsConfigCtrl'\n			resolve: userResolve\n		.state 'member-dashboard',\n			url: '/member-dashboard'\n			templateUrl: 'client/jade/member-dashboard.html'\n			controller: 'memberDashboardCtrl'\n			resolve: userResolve\n		.state 'team-lead',\n			url: '/team-lead'\n			templateUrl: 'client/jade/team-lead.html'\n			controller: 'teamLeadCtrl'\n			resolve: userResolve\n		.state 'login',\n			url: '/login'\n			templateUrl: 'client/jade/login.html'\n			\n	$urlRouterProvider.otherwise '/teams-config'\n	$locationProvider.html5Mode true\n]\n\napp.run ['$rootScope', '$state', ($rootScope, $state) ->\n	Accounts.onLogin () -> $state.go 'member-dashboard'\n	accountsUIBootstrap3.logoutCallback = () -> $state.go 'login'\n	$rootScope.$on '$stateChangeError', (event, toState, toParams, fromState, fromParams, error) ->\n		# We can catch the error thrown when the $requireUser promise is rejected\n		# and redirect the user back to the main page\n		if error == 'AUTH_REQUIRED'\n			$state.go 'login'\n]\n\napp.controller 'teamsConfigCtrl', ['$scope', '$meteor', '$window', ($scope, $meteor, $window) ->\n	registerWatch()\n\n	$scope.selectTeam = (team) ->\n		console.log \"select team: #{team.name}\"\n		for t in $scope.teams\n			t.selected = false\n		team.selected = true\n		$scope.currentTeam = team\n\n\n	$scope.employees = $scope.$meteorCollection(share.Employees)\n	$scope.teams = $scope.$meteorCollection(share.Teams)\n	console.log $scope.teams\n	if $scope.teams.length > 0\n		$scope.selectTeam($scope.teams[0])\n\n	registerWatch = () ->\n		$scope.watchTeamName = $scope.$watch 'newteamname', ((oldValue, newValue) ->\n				if not _.isEqual oldValue, newValue\n					# check for name existance\n					f = $scope.$meteorCollection(() -> share.Teams.findOne({name: $scope.newValue}))\n					$scope.teamNameNotUnique = f?\n			), true\n\n	$scope.deleteTeam = (team) ->\n		if $window.confirm 'Wirklich löschen?'\n			console.log \"archive id: #{family._id}\"\n\n	$scope.createTeam = (teamname, teamlead) ->\n		$scope.$meteorCollection(share.Teams).save\n			name: teamname\n			lead: \n				_id: teamlead._id\n				name: teamlead.name\n			undersigners: []\n			members: []\n\n	$scope.addMember = (newmember) ->\n		console.log \"add new member: #{newmember.name}\"\n		if $scope.currentTeam\n			$scope.currentTeam.members.push \n				_id: newmember._id\n				name: newmember.name\n		$scope.newMember = null\n\n	$scope.removeMember = (member) ->\n		console.log \"remove member: #{member.name}\"\n		if $scope.currentTeam\n			_remove $scope.currentTeam.members, member\n]\n\napp.controller 'memberDashboardCtrl', ['$scope', '$meteor', '$window', ($scope, $meteor, $window) ->\n	$scope.member = $scope.$meteorCollection(() -> share.Employees.find({name: \"Sebastian Krämer\"}))\n	$scope.teams = _.filter($scope.$meteorCollection(share.Teams), (t) -> _.some(t.members, (m) -> m._id==$scope.member._id))\n	console.log $scope.member\n	#$scope.member = _.find $scope.$meteorCollection(share.Employees), (e) -> e.name == \"Sebastian Krämer\"\n	$scope.minDate = new Date()\n	$scope.maxDate = new Date(2020, 12, 31)\n	$scope.format = 'dd.MM.yyyy'\n	$scope.maxPrio = 3\n	$scope.dateOptions =\n		formatYear: 'yy'\n		startingDay: 1\n\n	$scope.hoveringOver = (value) ->\n		$scope.overStar = value\n\n	$scope.openFrom = ($event) ->\n		$event.preventDefault()\n		$event.stopPropagation()\n		$scope.openedFrom = true\n\n	$scope.openTo = ($event) ->\n		$event.preventDefault()\n		$event.stopPropagation()\n		$scope.openedTo = true\n\n	$scope.createRequest = () ->\n		$scope.member.vacations.push\n			name: $scope.newRequestName\n			from: $scope.vacationFrom\n			to: $scope.vacationTo\n			prio: $scope.prio\n			state: \"pending\"\n		$scope.newRequestName = \"\"\n		$scope.vacationFrom = null\n		$scope.vacationTo = null\n		$scope.prio = null\n]\n\napp.controller 'teamLeadCtrl', ['$scope', '$meteor', '$window', ($scope, $meteor, $window) ->\n	employees = $scope.$meteorCollection(share.Employees)\n	$scope.member = _.find employees, (e) -> e.name == \"Olaf von Dühren\"\n	$scope.teams = _.filter($scope.$meteorCollection(share.Teams), (t) -> t.lead._id == $scope.member._id)\n	$scope.requests = []\n	for t in $scope.teams\n		for m in t.members\n			e = _.find employees, (e) -> e._id == m._id\n			console.log \"found my team member: #{e.name}\"\n			for r in _.filter(e.vacations, (v) -> v.state == \"pending\")\n				r.member = e\n				$scope.requests.push r\n]",
+			"file": "client/client.coffee",
+			"file_size": 4958,
+			"file_write_time": 130816113178596290,
+			"settings":
+			{
+				"buffer_size": 4799,
+				"line_ending": "Windows"
+>>>>>>> origin/master
 			}
 		},
 		{
@@ -372,6 +388,7 @@
 			"settings":
 			{
 				"buffer_size": 898,
+<<<<<<< HEAD
 				"line_ending": "Unix"
 			}
 		},
@@ -381,12 +398,16 @@
 			{
 				"buffer_size": 261,
 				"line_ending": "Unix"
+=======
+				"line_ending": "Windows"
+>>>>>>> origin/master
 			}
 		},
 		{
 			"file": "client/jade/teams-config.ng.jade",
 			"settings":
 			{
+<<<<<<< HEAD
 				"buffer_size": 1515,
 				"line_ending": "Unix",
 				"name": ".container-fluid"
@@ -414,6 +435,10 @@
 			{
 				"buffer_size": 547,
 				"line_ending": "Unix"
+=======
+				"buffer_size": 1634,
+				"line_ending": "Windows"
+>>>>>>> origin/master
 			}
 		}
 	],
@@ -499,6 +524,7 @@
 	},
 	"expanded_folders":
 	[
+<<<<<<< HEAD
 		"/Users/basti/Development/meteor/ivo",
 		"/Users/basti/Development/meteor/ivo/client",
 		"/Users/basti/Development/meteor/ivo/client/jade",
@@ -512,6 +538,14 @@
 		"/Users/basti/Development/meteor/ivo/client/jade/member-dashboard.ng.jade",
 		"/Users/basti/Development/meteor/ivo/client/jade/member-dashboard.ng.html",
 		"/Users/basti/Development/meteor/ivo/client/jade/eine.ng.jade",
+=======
+		"/D/sync/_private/devel/ivo"
+	],
+	"file_history":
+	[
+		"/D/projects/CTB/vc/TwinVC-trunk/Client/VCClient/bin/Debug/Log/VCClient_FN199_20150717.log.0",
+		"/D/projects/CTB/vc/TwinVC-trunk/Client/VCClient/bin/Debug/Log/VCClient_FN199_20150717.log.1",
+>>>>>>> origin/master
 		"/Users/basti/Development/meteor/kita-families/fix-fon.coffee",
 		"/Users/basti/Development/meteor/kita-families/README.md",
 		"/Users/basti/Development/meteor/kita-families/.meteor/local/build/programs/server/npm/mongo/node_modules/mongodb/node_modules/readable-stream/transform.js",
@@ -635,7 +669,13 @@
 		"/Users/basti/Library/Application Support/Sublime Text 3/Packages/User/Preferences.sublime-settings",
 		"/Users/basti/Development/web/mo-edit/client/public/bower/jquery-ui/ui/effect-drop.js",
 		"/Users/basti/Development/web/mo-edit/server/controllers/documents/index.coffee",
+<<<<<<< HEAD
 		"/Users/basti/Development/web/mo-edit/node_modules/mongoose/node_modules/mpromise/test/promises.Aplus.js"
+=======
+		"/Users/basti/Development/web/mo-edit/node_modules/mongoose/node_modules/mpromise/test/promises.Aplus.js",
+		"/Users/basti/Development/web/mo-edit/node_modules/log4js/test/fileAppender-test.js",
+		"/Users/basti/Development/web/mo-edit/node_modules/gulp/node_modules/vinyl-fs/node_modules/graceful-fs/test/max-open.js"
+>>>>>>> origin/master
 	],
 	"find":
 	{
@@ -653,6 +693,7 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+<<<<<<< HEAD
 			"config",
 			"vacation",
 			"memberDashboardCtrl",
@@ -710,6 +751,10 @@
 			"Families",
 			"families",
 			"Families",
+=======
+			"addHoursForm",
+			"$meteor.collection",
+>>>>>>> origin/master
 			".0",
 			"papa",
 			"mama",
@@ -780,7 +825,66 @@
 			"templateUrl",
 			"Parties",
 			"party",
+<<<<<<< HEAD
 			"parties"
+=======
+			"parties",
+			"\"",
+			"families_in",
+			"dish",
+			"dishes_init",
+			"dishes_json",
+			"Family",
+			"family",
+			"Family",
+			"\"",
+			"//-",
+			"client/",
+			"\"}}",
+			"1RCF7nmo3h8RRQJsAFFw7eCfhr3YZUPZzOYj3boXgGqs",
+			"state",
+			"autonumber",
+			"title",
+			"print_statistics",
+			"analyse",
+			"\ntask :ausgaben => :tql do\n  analyse \"ausgaben\", [\"%\"], \"<\"\nend",
+			".jumbotron",
+			"md-3",
+			"hasPreviousVersion",
+			"button",
+			"primary",
+			"previousVersion",
+			"typ-",
+			"typbutton",
+			"center-block",
+			"detailaction",
+			".center",
+			"h1",
+			"md-3",
+			"Comment",
+			"comment",
+			"Comment",
+			"comment",
+			"$scope.currentComment",
+			".sidebar-button",
+			"value",
+			"newText",
+			"$scope.newCommentText",
+			"newCommentText",
+			"myScope",
+			"\"",
+			".detailactionbutton",
+			"TIME",
+			"colourRed",
+			"addComment",
+			"taSelection",
+			"docLastChangeDate",
+			"md-4",
+			"(++)\n",
+			".catch (e) ->",
+			"author.name",
+			"Author.name"
+>>>>>>> origin/master
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -798,11 +902,16 @@
 	"groups":
 	[
 		{
+<<<<<<< HEAD
 			"selected": 2,
+=======
+			"selected": 0,
+>>>>>>> origin/master
 			"sheets":
 			[
 				{
 					"buffer": 0,
+<<<<<<< HEAD
 					"file": "server/server.coffee",
 					"semi_transient": false,
 					"settings":
@@ -890,19 +999,30 @@
 				},
 				{
 					"buffer": 3,
+=======
+>>>>>>> origin/master
 					"file": "client/client.coffee",
 					"semi_transient": false,
 					"settings":
 					{
+<<<<<<< HEAD
 						"buffer_size": 4282,
+=======
+						"buffer_size": 4799,
+>>>>>>> origin/master
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
+<<<<<<< HEAD
 								3064,
 								3064
+=======
+								3115,
+								3115
+>>>>>>> origin/master
 							]
 						],
 						"settings":
@@ -911,6 +1031,7 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
+<<<<<<< HEAD
 						"translation.y": 1388.0,
 						"zoom_level": 1.0
 					},
@@ -919,6 +1040,16 @@
 				},
 				{
 					"buffer": 4,
+=======
+						"translation.y": 1706.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+>>>>>>> origin/master
 					"file": "client/jade/team-lead.ng.jade",
 					"semi_transient": false,
 					"settings":
@@ -930,8 +1061,13 @@
 						"selection":
 						[
 							[
+<<<<<<< HEAD
 								466,
 								799
+=======
+								0,
+								0
+>>>>>>> origin/master
 							]
 						],
 						"settings":
@@ -947,6 +1083,7 @@
 					"type": "text"
 				},
 				{
+<<<<<<< HEAD
 					"buffer": 5,
 					"file": "client/styles/main.styl",
 					"semi_transient": false,
@@ -978,10 +1115,14 @@
 				},
 				{
 					"buffer": 6,
+=======
+					"buffer": 2,
+>>>>>>> origin/master
 					"file": "client/jade/teams-config.ng.jade",
 					"semi_transient": false,
 					"settings":
 					{
+<<<<<<< HEAD
 						"buffer_size": 1515,
 						"regions":
 						{
@@ -1012,14 +1153,22 @@
 					"settings":
 					{
 						"buffer_size": 504,
+=======
+						"buffer_size": 1634,
+>>>>>>> origin/master
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
+<<<<<<< HEAD
 								504,
 								504
+=======
+								240,
+								240
+>>>>>>> origin/master
 							]
 						],
 						"settings":
@@ -1031,6 +1180,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
+<<<<<<< HEAD
 					"stack_index": 6,
 					"type": "text"
 				},
@@ -1090,6 +1240,9 @@
 						"zoom_level": 1.0
 					},
 					"stack_index": 9,
+=======
+					"stack_index": 1,
+>>>>>>> origin/master
 					"type": "text"
 				}
 			]
@@ -1148,6 +1301,21 @@
 		"selected_items":
 		[
 			[
+<<<<<<< HEAD
+=======
+				"te",
+				"client\\jade\\teams-config.ng.jade"
+			],
+			[
+				"cli",
+				"client\\client.coffee"
+			],
+			[
+				"tag",
+				"client/jade/tags.ng.jade"
+			],
+			[
+>>>>>>> origin/master
 				"ind",
 				"client/jade/index.jade"
 			],

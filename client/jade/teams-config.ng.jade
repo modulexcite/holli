@@ -8,17 +8,19 @@
 					ul.teams.list-unstyled
 						li.team(ng-repeat="team in teams", ng-class="{'selected':team.selected}", ng-click="selectTeam(team)")
 							strong.team-name {{team.name}}
+							i.pull-right.fa.fa-trash-o(ng-click="deleteTeam(team)")
 							.team-lead {{team.lead.name}}
 
 					h3 New Team
-					.new-team
+					form.new-team
 						.form-group
 							label(for='name') Name 
 							input#name.form-control(type='text', placeholder='Name', ng-model="newteamname") 
+							p.help-block(ng-if="teamNameNotUnique") Team with this name already exists
 						.form-group
 							label(for='lead') Lead 
 							input#lead.form-control(type='text', placeholder='Lead', ng-model="newteamlead", typeahead="lead as lead.name for lead in employees | filter:$viewValue | limitTo:10")
-						button.btn.btn-primary.form-control(ng-click="createTeam(newteamname, newteamlead)")
+						button.btn.btn-primary.form-control(ng-click="createTeam(newteamname, newteamlead)", ng-disabled="teamNameNotUnique")
 							span.glyphicon.glyphicon-plus
 
 
