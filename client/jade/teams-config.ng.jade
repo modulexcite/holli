@@ -8,6 +8,7 @@
 					ul.teams.list-unstyled
 						li.team(ng-repeat="team in teams", ng-class="{'selected':team.selected}", ng-click="selectTeam(team)")
 							strong.team-name {{team.name}}
+							i.pull-right.fa.fa-trash-o(ng-click="deleteTeam(team)")
 							.team-lead {{team.lead.name}}
 
 					h3 New Team

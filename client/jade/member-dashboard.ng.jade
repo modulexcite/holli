@@ -1,6 +1,6 @@
 .container-fluid
 	.row
-		.col-md-4
+		.col-md-3
 			.panel.panel-primary
 				.panel-heading My Teams
 				.panel-body
@@ -9,7 +9,7 @@
 							strong.team-name {{team.name}}
 							.team-lead {{team.lead.name}}
 
-		.col-md-4
+		.col-md-3
 			.panel.panel-primary
 				.panel-heading My pending requests
 				.panel-body
@@ -20,12 +20,23 @@
 							.vacation-prio 
 								rating(ng-model="vacation.prio", max="maxPrio", readonly)
 
-		.col-md-4
+		.col-md-3
 			.panel.panel-primary
 				.panel-heading My successful requests
 				.panel-body
 					ul.vacations.list-unstyled
-						li.vacation(ng-repeat="vacation in member.vacations | filter : { state: 'confirmed'}")
+						li.vacation-accepted(ng-repeat="vacation in member.vacations | filter : { state: 'accepted'}")
+							strong.vacation-name {{vacation.name}}
+							.vacation-fromto {{vacation.from | date : format}} - {{vacation.to | date : format}}
+							.vacation-prio 
+								rating(ng-model="vacation.prio", max="maxPrio", readonly)
+
+		.col-md-3
+			.panel.panel-primary
+				.panel-heading My denied requests
+				.panel-body
+					ul.vacations.list-unstyled
+						li.vacation-denied(ng-repeat="vacation in member.vacations | filter : { state: 'denied'}")
 							strong.vacation-name {{vacation.name}}
 							.vacation-fromto {{vacation.from | date : format}} - {{vacation.to | date : format}}
 							.vacation-prio 
@@ -64,3 +75,9 @@
 					button.btn.btn-primary.form-control(ng-click="createRequest()")
 						span.glyphicon.glyphicon-plus
 
+
+	.row
+		.col-md-12
+			.panel.panel-info
+				.panel-heading Team Schedule
+				.panel-body

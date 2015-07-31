@@ -3,6 +3,7 @@ Accounts.ui.config
 	passwordSignupFields: 'USERNAME_ONLY'
 
 # angular
+_ = lodash
 app = angular.module 'app', ['angular-meteor', 'ui.router', 'ui.bootstrap']
 
 # routes
@@ -48,8 +49,6 @@ app.run ['$rootScope', '$state', ($rootScope, $state) ->
 ]
 
 app.controller 'teamsConfigCtrl', ['$scope', '$meteor', '$window', ($scope, $meteor, $window) ->
-	registerWatch()
-
 	$scope.selectTeam = (team) ->
 		console.log "select team: #{team.name}"
 		for t in $scope.teams
@@ -65,16 +64,19 @@ app.controller 'teamsConfigCtrl', ['$scope', '$meteor', '$window', ($scope, $met
 		$scope.selectTeam($scope.teams[0])
 
 	registerWatch = () ->
-		$scope.watchTeamName = $scope.$watch 'newteamname', ((oldValue, newValue) ->
+		$scope.watchTeamName = $scope.$watch 'newteamname', ((newValue, oldValue) ->
 				if not _.isEqual oldValue, newValue
-					# check for name existance
-					f = $scope.$meteorCollection(() -> share.Teams.findOne({name: $scope.newValue}))
-					$scope.teamNameNotUnique = f?
+					# check for name existence
+					f = _.some $scope.teams, (t) -> t.name == newValue
+					$scope.teamNameNotUnique = f
 			), true
+
+	registerWatch()
 
 	$scope.deleteTeam = (team) ->
 		if $window.confirm 'Wirklich löschen?'
-			console.log "archive id: #{family._id}"
+			console.log "delete team id: #{team._id}"
+			$scope.teams.remove team
 
 	$scope.createTeam = (teamname, teamlead) ->
 		$scope.$meteorCollection(share.Teams).save
@@ -84,6 +86,7 @@ app.controller 'teamsConfigCtrl', ['$scope', '$meteor', '$window', ($scope, $met
 				name: teamlead.name
 			undersigners: []
 			members: []
+		$scope.newteamname = ""
 
 	$scope.addMember = (newmember) ->
 		console.log "add new member: #{newmember.name}"
@@ -96,14 +99,14 @@ app.controller 'teamsConfigCtrl', ['$scope', '$meteor', '$window', ($scope, $met
 	$scope.removeMember = (member) ->
 		console.log "remove member: #{member.name}"
 		if $scope.currentTeam
-			_remove $scope.currentTeam.members, member
+			_.remove $scope.currentTeam.members, member
 ]
 
 app.controller 'memberDashboardCtrl', ['$scope', '$meteor', '$window', ($scope, $meteor, $window) ->
+	m = share.Employees.findOne {name: "Sebastian Krämer"}
+	$scope.member = $scope.$meteorObject(share.Employees, m._id)
+	console.log "member: #{$scope.member}"
 	$scope.teams = _.filter($scope.$meteorCollection(share.Teams), (t) -> _.some(t.members, (m) -> m._id==$scope.member._id))
-	$scope.member = $scope.$meteorCollection(() -> share.Employees.findOne({name: "Sebastian Krämer"}))
-	console.log $scope.member
-	#$scope.member = _.find $scope.$meteorCollection(share.Employees), (e) -> e.name == "Sebastian Krämer"
 	$scope.minDate = new Date()
 	$scope.maxDate = new Date(2020, 12, 31)
 	$scope.format = 'dd.MM.yyyy'
@@ -127,11 +130,13 @@ app.controller 'memberDashboardCtrl', ['$scope', '$meteor', '$window', ($scope, 
 
 	$scope.createRequest = () ->
 		$scope.member.vacations.push
+			_id: new Mongo.ObjectID()
 			name: $scope.newRequestName
 			from: $scope.vacationFrom
 			to: $scope.vacationTo
 			prio: $scope.prio
 			state: "pending"
+
 		$scope.newRequestName = ""
 		$scope.vacationFrom = null
 		$scope.vacationTo = null
@@ -140,14 +145,28 @@ app.controller 'memberDashboardCtrl', ['$scope', '$meteor', '$window', ($scope, 
 
 app.controller 'teamLeadCtrl', ['$scope', '$meteor', '$window', ($scope, $meteor, $window) ->
 	employees = $scope.$meteorCollection(share.Employees)
-	$scope.member = _.find employees, (e) -> e.name == "Olaf von Dühren"
-	$scope.teams = _.filter($scope.$meteorCollection(share.Teams), (t) -> t.lead._id == $scope.member._id)
+	$scope.member = share.Employees.findOne {name: "Olaf von Dühren"}
+	console.log "member (lead): #{$scope.member}"
+	$scope.teams = $scope.$meteorCollection( () -> share.Teams.find {"lead._id": $scope.member._id} )
 	$scope.requests = []
 	for t in $scope.teams
+		console.log "found team: #{t}"
 		for m in t.members
-			e = _.find employees, (e) -> e._id == m._id
+			e = share.Employees.findOne m._id
 			console.log "found my team member: #{e.name}"
 			for r in _.filter(e.vacations, (v) -> v.state == "pending")
 				r.member = e
 				$scope.requests.push r
+
+	$scope.acceptRequest = (request) ->
+		member = $scope.$meteorObject(share.Employees, request.member._id)
+		console.log "accept request #{request.name} from #{request.member.name}"
+		i = _.findIndex member.vacations, (req) -> req.name == request.name
+		r = member.vacations[i]
+		member.vacations[i].state = "accepted"
+	
+	$scope.denyRequest = (request) ->
+		# TODO: give reason
+		console.log "denied request #{request.name} from #{request.member.name} with reason: TODO"
+		request.state = "denied"
 ]
