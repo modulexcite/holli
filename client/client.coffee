@@ -219,25 +219,23 @@ app.controller 'teamLeadCtrl', ['$scope', '$meteor', '$window', 'uiCalendarConfi
 		pendingEvents.events.splice(0, pendingEvents.events.length)
 		acceptedEvents.events.splice(0, acceptedEvents.events.length)
 
-		for t in $scope.teams
-			console.log "found team: #{t}"
-			for m in t.members
-				e = share.Employees.findOne m._id
-				console.log "found my team member: #{e.name}"
-				for r in _.filter(requests, (v) -> v.memberRef == e._id)
-					r.member = e
-					$scope.requests.push r
-					if r.from
-						event = 
-							id: r._id
-							title: "#{r.name} (#{r.member.name})"
-							start: r.from
-							end: r.to
-							allDay: true
-						if r.state == "pending"
-							pendingEvents.events.push event
-						if r.state == "accepted"
-							acceptedEvents.events.push event
+		myMembers = _($scope.teams).map((t)-> _.map(t.members, (m)-> m._id)).flatten().value()
+		myTeamRequests = $scope.$meteorCollection () -> share.Requests.find {memberRef: {$in: myMembers}, to: {$gt: new Date()} }
+
+		for r in myTeamRequests
+			r.member = share.Employees.findOne(r.memberRef)
+			$scope.requests.push r
+			if r.from
+				event = 
+					id: r._id
+					title: "#{r.name} (#{r.member.name})"
+					start: r.from
+					end: r.to
+					allDay: true
+				if r.state == "pending"
+					pendingEvents.events.push event
+				if r.state == "accepted"
+					acceptedEvents.events.push event
 
 	$scope.acceptRequest = (request) ->
 		console.log request
@@ -265,6 +263,6 @@ app.controller 'teamLeadCtrl', ['$scope', '$meteor', '$window', 'uiCalendarConfi
 	requests = $scope.$meteorCollection(share.Requests)
 	$scope.member = share.Employees.findOne {name: "Olaf von Dühren"}
 	console.log "member (lead): #{$scope.member}"
-	$scope.teams = $scope.$meteorCollection( () -> share.Teams.find {"lead._id": $scope.member._id} )
+	$scope.teams = $scope.$meteorCollection () -> share.Teams.find {"lead._id": $scope.member._id}
 	updateEvents()
 ]
