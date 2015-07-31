@@ -9,29 +9,17 @@
 							strong.team-name {{team.name}}
 							.team-lead {{team.lead.name}}
 
-		.col-md-3
 			.panel.panel-primary
 				.panel-heading My pending requests
 				.panel-body
 					ul.vacations.list-unstyled
 						li.vacation(ng-repeat="vacation in requests | filter : { state: 'pending'}")
 							strong.vacation-name {{vacation.name}}
+							i.fa.fa-trash-o.pull-right(ng-click="deleteRequest(vacation)")
 							.vacation-fromto {{vacation.from | date : format}} - {{vacation.to | date : format}}
 							.vacation-prio 
 								rating(ng-model="vacation.prio", max="maxPrio", readonly)
 
-		.col-md-3
-			.panel.panel-primary
-				.panel-heading My successful requests
-				.panel-body
-					ul.vacations.list-unstyled
-						li.vacation-accepted(ng-repeat="vacation in requests | filter : { state: 'accepted'}")
-							strong.vacation-name {{vacation.name}}
-							.vacation-fromto {{vacation.from | date : format}} - {{vacation.to | date : format}}
-							.vacation-prio 
-								rating(ng-model="vacation.prio", max="maxPrio", readonly)
-
-		.col-md-3
 			.panel.panel-primary
 				.panel-heading My denied requests
 				.panel-body
@@ -41,14 +29,22 @@
 							.vacation-fromto {{vacation.from | date : format}} - {{vacation.to | date : format}}
 							.vacation-prio 
 								rating(ng-model="vacation.prio", max="maxPrio", readonly)
-							
 
-	.row
-		.col-md-12
+			.panel.panel-primary
+				.panel-heading My successful requests
+				.panel-body
+					ul.vacations.list-unstyled
+						li.vacation-accepted(ng-repeat="vacation in requests | filter : { state: 'accepted'}")
+							strong.vacation-name {{vacation.name}}
+							.vacation-fromto {{vacation.from | date : format}} - {{vacation.to | date : format}}
+							.vacation-prio 
+								rating(ng-model="vacation.prio", max="maxPrio", readonly)
+							
+		.col-md-9
 			.panel.panel-info
 				.panel-heading New Request
 				.panel-body
-					.col-md-3
+					.col-md-2
 						.form-group
 							label(for='name') Name 
 							input#name.form-control(type='text', placeholder='Name', ng-model="newRequestName") 
@@ -68,16 +64,17 @@
 								span.input-group-btn
 									button.btn.btn-default(ng-click="openTo($event)")
 										i.glyphicon.glyphicon-calendar
-					.col-md-3
+					.col-md-1
 						.form-group
 							label(for='prio') Priority 
 							rating#prio.form-control(ng-model="prio", max="maxPrio", on-hover="hoveringOver(value)", on-leave="overStar = null")
-					button.btn.btn-primary.form-control(ng-click="createRequest()", ng-disabled="!newRequestName")
-						span.glyphicon.glyphicon-plus
+					.col-md-2
+						.form-group
+							label Save
+							button.btn.btn-primary.form-control(ng-click="createRequest()", ng-disabled="!newRequestName")
+								i.glyphicon.glyphicon-plus
 
-
-	.row
-		.col-md-12
 			.panel.panel-info
 				.panel-heading Team Schedule
 				.panel-body
+					#teamCalendar.calendar(ui-calendar="uiConfig.calendar", ng-model="requestEventSources", calendar="teamCalendar")

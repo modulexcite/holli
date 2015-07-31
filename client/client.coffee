@@ -103,22 +103,7 @@ app.controller 'teamsConfigCtrl', ['$scope', '$meteor', '$window', ($scope, $met
 ]
 
 app.controller 'memberDashboardCtrl', ['$scope', '$meteor', '$window', ($scope, $meteor, $window) ->
-	$scope.member = share.Employees.findOne {name: "Sebastian Krämer"}
-	console.log "member: #{$scope.member}"
-	$scope.teams =  $scope.$meteorCollection () -> share.Teams.find {members: { $elemMatch: {_id: $scope.member._id}}}
-	$scope.requests =  $scope.$meteorCollection () -> share.Requests.find {memberRef: $scope.member._id, to: {$gt: new Date()} }
-	console.log "requests:"
-	console.log $scope.requests
-	$scope.minDate = new Date()
-	$scope.maxDate = new Date(2020, 12, 31)
-	$scope.format = 'dd.MM.yyyy'
-	$scope.maxPrio = 3
-	$scope.vacationFrom = new Date(2015, 7, 2)
-	$scope.vacationTo = new Date(2015, 7, 5)
-	$scope.dateOptions =
-		formatYear: 'yy'
-		startingDay: 1
-
+	
 	$scope.hoveringOver = (value) ->
 		$scope.overStar = value
 
@@ -131,6 +116,11 @@ app.controller 'memberDashboardCtrl', ['$scope', '$meteor', '$window', ($scope, 
 		$event.preventDefault()
 		$event.stopPropagation()
 		$scope.openedTo = true
+
+	$scope.deleteRequest = (request) ->
+		console.log "remove request: #{request.name}"
+		$scope.$meteorCollection(share.Requests).remove request
+		updateEvents()
 
 	$scope.createRequest = () ->
 		newRequest = 
@@ -145,16 +135,76 @@ app.controller 'memberDashboardCtrl', ['$scope', '$meteor', '$window', ($scope, 
 		$scope.$meteorCollection(share.Requests).save(newRequest).then (inserts) ->
 			id = _.first(inserts)._id
 			console.log "inserted new request with id:#{id}"
+			# reset entry fields
+			$scope.newRequestName = ""
+			#$scope.vacationFrom = null
+			#$scope.vacationTo = null
+			$scope.prio = null
+			updateEvents()
+		
 
-		# reset entry fields
-		$scope.newRequestName = ""
-		$scope.vacationFrom = null
-		$scope.vacationTo = null
-		$scope.prio = null
+	updateEvents = () ->
+		# empty arrays, without setting new reference
+		pendingEvents.events.splice(0, pendingEvents.events.length)
+		acceptedEvents.events.splice(0, acceptedEvents.events.length)
+
+		for t in $scope.teams
+			console.log "found team: #{t}"
+			for m in t.members
+				e = share.Employees.findOne m._id
+				console.log "found my team member: #{e.name}"
+				for r in _.filter(allRequests, (v) -> v.memberRef == e._id)
+					r.member = e
+					if r.from
+						event = 
+							id: r._id
+							title: "#{r.name} (#{r.member.name})"
+							start: r.from
+							end: r.to
+							allDay: true
+						if r.state == "pending"
+							pendingEvents.events.push event
+						if r.state == "accepted"
+							acceptedEvents.events.push event
+
+	# ---------------------------------------------------------------------------------
+	$scope.member = share.Employees.findOne {name: "Sebastian Krämer"}
+	console.log "member: #{$scope.member}"
+	$scope.teams =  $scope.$meteorCollection () -> share.Teams.find {members: { $elemMatch: {_id: $scope.member._id}}}
+	$scope.requests =  $scope.$meteorCollection () -> share.Requests.find {memberRef: $scope.member._id, to: {$gt: new Date()} }
+	allRequests = $scope.$meteorCollection(share.Requests)
+	$scope.minDate = new Date()
+	$scope.maxDate = new Date(2020, 12, 31)
+	$scope.format = 'dd.MM.yyyy'
+	$scope.maxPrio = 3
+	$scope.vacationFrom = new Date(2015, 7, 2)
+	$scope.vacationTo = new Date(2015, 7, 5)
+	$scope.dateOptions =
+		formatYear: 'yy'
+		startingDay: 1
+	pendingEvents = 
+		textColor: '#000'
+		color: '#efefef'
+		events: []
+	acceptedEvents = 
+		textColor: '#000'
+		color: '#B8E297'
+		events: []
+	$scope.requestEventSources = [pendingEvents, acceptedEvents]
+	$scope.uiConfig =
+		calendar:
+			height: 500
+			editable: false
+			header:
+				left: 'title'
+				center: ''
+				right: 'today prev,next'
+	updateEvents()
 ]
 
 app.controller 'teamLeadCtrl', ['$scope', '$meteor', '$window', 'uiCalendarConfig', '$timeout', ($scope, $meteor, $window, uiCalendarConfig, $timeout) ->
 	pendingEvents = 
+		textColor: '#000'
 		color: '#efefef'
 		events: []
 	acceptedEvents = 
@@ -163,7 +213,7 @@ app.controller 'teamLeadCtrl', ['$scope', '$meteor', '$window', 'uiCalendarConfi
 		events: []
 	$scope.requestEventSources = [pendingEvents, acceptedEvents]
 
-	updateRequests = () ->
+	updateEvents = () ->
 		$scope.requests = []
 		# empty arrays, without setting new reference
 		pendingEvents.events.splice(0, pendingEvents.events.length)
@@ -193,7 +243,7 @@ app.controller 'teamLeadCtrl', ['$scope', '$meteor', '$window', 'uiCalendarConfi
 		console.log request
 		request.state = "accepted"
 		console.log "accept request #{request.name} from #{request.member.name}"
-		updateRequests()
+		updateEvents()
 	
 	$scope.denyRequest = (request) ->
 		console.log request
@@ -202,22 +252,19 @@ app.controller 'teamLeadCtrl', ['$scope', '$meteor', '$window', 'uiCalendarConfi
 		request.state = "denied"
 		request.denyReason = reason
 		console.log "denied request #{request.name} from #{request.member.name} with reason: #{reason}"
-		updateRequests()
+		updateEvents()
 
-	$scope.uiConfig = {
-			calendar:{
-				height: 500,
-				editable: false,
-				header:{
-					left: 'title',
-					center: '',
-					right: 'today prev,next'
-				},
-			}
-		};
+	$scope.uiConfig =
+		calendar:
+			height: 500
+			editable: false
+			header:
+				left: 'title'
+				center: ''
+				right: 'today prev,next'
 	requests = $scope.$meteorCollection(share.Requests)
 	$scope.member = share.Employees.findOne {name: "Olaf von Dühren"}
 	console.log "member (lead): #{$scope.member}"
 	$scope.teams = $scope.$meteorCollection( () -> share.Teams.find {"lead._id": $scope.member._id} )
-	updateRequests()
+	updateEvents()
 ]
