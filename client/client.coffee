@@ -237,6 +237,11 @@ app.controller 'teamLeadCtrl', ['$scope', '$meteor', '$window', 'uiCalendarConfi
 				if r.state == "accepted"
 					acceptedEvents.events.push event
 
+	$scope.requestDuration = (request) ->
+		fromMoment = moment(request.from.toISOString())
+		toMoment = moment(request.to.toISOString())
+		moment.duration(toMoment.diff(fromMoment)).days()
+
 	$scope.acceptRequest = (request) ->
 		console.log request
 		request.state = "accepted"

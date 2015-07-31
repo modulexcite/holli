@@ -18,7 +18,7 @@
 							i.fa.fa-thumbs-o-down.pull-right(ng-click="denyRequest(vacation)")
 							i.fa.fa-thumbs-o-up.pull-right(ng-click="acceptRequest(vacation)")
 							.vacation-name {{vacation.name}}
-							.vacation-fromto {{vacation.from | date : format}} - {{vacation.to | date : format}} (TODO: days)
+							.vacation-fromto {{vacation.from | date : format}} - {{vacation.to | date : format}} ({{ requestDuration(vacation)}} days)
 							.vacation-prio 
 								rating(ng-model="vacation.prio", max="maxPrio", readonly)
 
