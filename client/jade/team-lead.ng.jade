@@ -5,9 +5,10 @@
 				.panel-heading My Teams
 				.panel-body
 					ul.teams.list-unstyled
-						li.myteam(ng-repeat="team in teams")
+						li.myteam(ng-repeat="team in myTeams")
 							strong.team-name {{team.name}}
-							.team-lead {{team.lead.name}}
+							ul.members
+								li.text-muted(ng-repeat="m in team.members") {{ m.name }}
 
 			.panel.panel-primary
 				.panel-heading My pending requests
@@ -21,6 +22,13 @@
 							.vacation-fromto {{vacation.from | date : format}} - {{vacation.to | date : format}} ({{ requestDuration(vacation)}} days)
 							.vacation-prio 
 								rating(ng-model="vacation.prio", max="maxPrio", readonly)
+							span Lead-Teams
+							ul.members
+								li.text-muted(ng-repeat="t in vacation.teamsOfLead") {{ t.name }}
+							span Other Teams
+							ul.members
+								li.text-muted(ng-repeat="t in vacation.otherTeams") {{ t.name }}
+
 
 		.col-md-9
 			.panel.panel-primary
