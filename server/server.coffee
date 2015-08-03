@@ -1,10 +1,15 @@
 Meteor.startup () ->
-	# create default user
-	stdUser = Meteor.users.findOne({username: "test"})
+	# create default users
+	stdUser = Meteor.users.findOne({username: "olaf"})
 	if !stdUser
 		Accounts.createUser
-			username: "test"
-			password: "test"
+			username: "olaf"
+			password: "olaf"
+	stdUser = Meteor.users.findOne({username: "rafi"})
+	if !stdUser
+		Accounts.createUser
+			username: "rafi"
+			password: "rafi"
 
 
 	# not used, was for init...

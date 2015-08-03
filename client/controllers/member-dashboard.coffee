@@ -27,8 +27,8 @@ angular.module('app').controller 'memberDashboardCtrl', ['$scope', '$meteor', '$
 			from: $scope.vacationFrom
 			to: $scope.vacationTo
 			prio: $scope.prio
-			state: "pending"
 			type: "vacation"
+			responses: {}
 
 		$scope.$meteorCollection(share.Requests).save(newRequest).then (inserts) ->
 			id = _.first(inserts)._id
@@ -45,6 +45,9 @@ angular.module('app').controller 'memberDashboardCtrl', ['$scope', '$meteor', '$
 		# empty arrays, without setting new reference
 		pendingEvents.events.splice(0, pendingEvents.events.length)
 		acceptedEvents.events.splice(0, acceptedEvents.events.length)
+		$scope.pendingRequests = []
+		$scope.acceptedRequests = []
+		$scope.deniedRequests = []
 
 		for t in $scope.teams
 			console.log "found team: #{t}"
@@ -60,10 +63,17 @@ angular.module('app').controller 'memberDashboardCtrl', ['$scope', '$meteor', '$
 							start: r.from
 							end: r.to
 							allDay: true
-						if r.state == "pending"
+
+						if _.every(r.teamsOfLead, (t) -> r.responses[t._id]? && r.responses[t._id].state == 'pending')
 							pendingEvents.events.push event
-						if r.state == "accepted"
+							$scope.pendingRequests.push r
+
+						else if _.every(r.teamsOfLead, (t) -> r.responses[t._id]? && r.responses[t._id].state == 'accepted')
 							acceptedEvents.events.push event
+							$scope.acceptedRequests.push r
+
+						else 
+							$scope.deniedRequests.push r
 
 	# ---------------------------------------------------------------------------------
 	$scope.member = share.Employees.findOne {name: "Sebastian Krämer"}

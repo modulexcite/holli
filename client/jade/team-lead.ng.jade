@@ -22,12 +22,17 @@
 							.vacation-fromto {{vacation.from | date : format}} - {{vacation.to | date : format}} ({{ requestDuration(vacation)}} days)
 							.vacation-prio 
 								rating(ng-model="vacation.prio", max="maxPrio", readonly)
-							span Lead-Teams
+							span Your Teams
 							ul.members
-								li.text-muted(ng-repeat="t in vacation.teamsOfLead") {{ t.name }}
+								li.text-muted(ng-repeat="t in vacation.teamsOfLead") 
+									span {{ t.name }}
+
 							span Other Teams
 							ul.members
-								li.text-muted(ng-repeat="t in vacation.otherTeams") {{ t.name }}
+								li.text-muted(ng-repeat="t in vacation.otherTeams") 
+									span {{ t.name }}
+									i.fa.fa-thumbs-o-down(ng-if="vacation[t._id].state=='denied'")
+									i.fa.fa-thumbs-o-up(ng-if="vacation[t._id].state=='accepted'")
 
 
 		.col-md-9

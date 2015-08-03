@@ -29,7 +29,6 @@ angular.module('app').controller 'teamLeadCtrl', ['$scope', '$meteor', '$window'
 			memberTeams = $scope.$meteorCollection () -> share.Teams.find {members: { $elemMatch: {_id: r.memberRef}}}
 			r.otherTeams = _.reject memberTeams, (t) -> _.some(r.teamsOfLead, (tt) -> tt._id == t._id)
 			# add request to lists
-			$scope.requests.push r
 			if r.from
 				event = 
 					id: r._id
@@ -37,9 +36,10 @@ angular.module('app').controller 'teamLeadCtrl', ['$scope', '$meteor', '$window'
 					start: r.from
 					end: r.to
 					allDay: true
-				if r.state == "pending"
+				if _.every(r.teamsOfLead, (t) -> r.responses[t._id]? && r.responses[t._id].state == 'pending')
+					$scope.requests.push r
 					pendingEvents.events.push event
-				if r.state == "accepted"
+				if _.every(r.teamsOfLead, (t) -> r.responses[t._id]? && r.responses[t._id].state == 'accepted')
 					acceptedEvents.events.push event
 
 	$scope.requestDuration = (request) ->
@@ -52,19 +52,24 @@ angular.module('app').controller 'teamLeadCtrl', ['$scope', '$meteor', '$window'
 		myTeams = $scope.$meteorCollection () -> share.Teams.find {"lead._id": leadId}
 		_.filter(myTeams, (t) -> if t.members? then _.some(t.members, (m) -> m._id == memberId))
 
-	$scope.acceptRequest = (request) ->
+	$scope.acceptRequest = (requestUI) ->
 		console.log request
+		request = $scope.$meteorObject(share.Requests, requestUI._id)
 		for t in request.teamsOfLead
-			request[t._id].state = "accepted"
+			r = request.responses[t._id] || {}
+			r.state = "accepted"
 		console.log "accept request #{request.name} from #{request.member.name}"
 		updateEvents()
 	
-	$scope.denyRequest = (request) ->
+	$scope.denyRequest = (requestUI) ->
 		console.log request
+		request = $scope.$meteorObject(share.Requests, requestUI._id)
 		# TODO: give reason
 		reason = "-"
-		request.state = "denied"
-		request.denyReason = reason
+		for t in request.teamsOfLead
+			r = request.responses[t._id] || {}
+			r.state = "accepted"
+			r.denyReason = reason
 		console.log "denied request #{request.name} from #{request.member.name} with reason: #{reason}"
 		updateEvents()
 
@@ -77,8 +82,12 @@ angular.module('app').controller 'teamLeadCtrl', ['$scope', '$meteor', '$window'
 				center: ''
 				right: 'today prev,next'
 	requests = $scope.$meteorCollection(share.Requests)
-	$scope.member = share.Employees.findOne {name: "Olaf von Dühren"}
-	console.log "member (lead): #{$scope.member}"
+	if Meteor.user().username == 'olaf'
+		$scope.member = share.Employees.findOne {name: "Olaf von Dühren"}
+	else
+		$scope.member = share.Employees.findOne {name: "Rafael Velásquez"}
+	console.log "member (lead): #{$scope.member.name}"
 	$scope.myTeams = $scope.$meteorCollection () -> share.Teams.find {"lead._id": $scope.member._id}
 	updateEvents()
+	$scope.maxPrio = 3
 ]
