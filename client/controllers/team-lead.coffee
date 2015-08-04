@@ -21,11 +21,11 @@ angular.module('app').controller 'teamLeadCtrl', ['$scope', '$meteor', '$window'
 			if r.from
 				event = $scope.Requests.createCalendarEvent r
 
-				if $scope.Requests.isAccepted(r, r.teamsOfLead)
+				if $scope.Requests.isPending(r._id, r.teamsOfLead)
 					$scope.requests.push r
 					pendingEvents.events.push event
 				
-				if $scope.Requests.isDenied(r, r.teamsOfLead)
+				if $scope.Requests.isAccepted(r._id, r.teamsOfLead)
 					acceptedEvents.events.push event
 
 	$scope.requestDuration = (request) ->

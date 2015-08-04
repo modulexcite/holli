@@ -23,7 +23,9 @@ share.Requests = class Requests
 		console.log "#{state} request #{request.name} from #{request.member.name}"
 
 	isAccepted: (requestId, teamsOfLead) ->
-		@getRequest requestId
+		console.log "isAccepted:"
+		r = @getRequest requestId
+		console.log r
 		_.every(teamsOfLead, (t) -> r.responses[t._id]? && r.responses[t._id].state == 'accepted')
 
 	isPending: (requestId, teamsOfLead) ->
