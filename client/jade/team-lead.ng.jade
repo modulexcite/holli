@@ -34,9 +34,8 @@
 									i.fa.fa-thumbs-o-down(ng-if="vacation[t._id].state=='denied'")
 									i.fa.fa-thumbs-o-up(ng-if="vacation[t._id].state=='accepted'")
 
-
 		.col-md-9
 			.panel.panel-primary
 				.panel-heading Team schedules
 				.panel-body
-					#teamCalendar.calendar(ui-calendar="uiConfig.calendar", ng-model="requestEventSources", calendar="teamCalendar")
+					#teamCalendar.calendar(ui-calendar="calendarConfig.calendar", ng-model="requestEventSources", calendar="teamCalendar")

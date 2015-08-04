@@ -49,31 +49,31 @@ angular.module('app').controller 'memberDashboardCtrl', ['$scope', '$meteor', '$
 		$scope.acceptedRequests = []
 		$scope.deniedRequests = []
 
-		for t in $scope.teams
-			console.log "found team: #{t}"
-			for m in t.members
-				e = share.Employees.findOne m._id
-				console.log "found my team member: #{e.name}"
-				for r in _.filter(allRequests, (v) -> v.memberRef == e._id)
-					r.member = e
-					if r.from
-						event = 
-							id: r._id
-							title: "#{r.name} (#{r.member.name})"
-							start: r.from
-							end: r.to
-							allDay: true
+		for r in _.filter(allRequests, (v) -> v.memberRef == $scope.member._id)
+			r.member = share.Employees.findOne(r.memberRef)
+			if r.from
+				event = 
+					id: r._id
+					title: "#{r.name} (#{r.member.name})"
+					start: r.from
+					end: r.to
+					allDay: true
 
-						if _.every(r.teamsOfLead, (t) -> r.responses[t._id]? && r.responses[t._id].state == 'pending')
-							pendingEvents.events.push event
-							$scope.pendingRequests.push r
-
-						else if _.every(r.teamsOfLead, (t) -> r.responses[t._id]? && r.responses[t._id].state == 'accepted')
-							acceptedEvents.events.push event
-							$scope.acceptedRequests.push r
-
-						else 
-							$scope.deniedRequests.push r
+				console.log r
+				# only one denied is enough to let a request fail
+				if _.some(r.teamsOfLead, (t) -> r.responses[t._id]? && r.responses[t._id].state == 'denied')
+					$scope.deniedRequests.push r
+					console.log "add #{r.name} to DENIED"
+				# all must be accepted to accept  request
+				else if _.every(r.teamsOfLead, (t) -> r.responses[t._id]? && r.responses[t._id].state == 'accepted')
+					acceptedEvents.events.push event
+					$scope.acceptedRequests.push r
+					console.log "add #{r.name} to ACCEPTED"
+				# all other should be pending...right?
+				else 
+					pendingEvents.events.push event
+					$scope.pendingRequests.push r
+					console.log "add #{r.name} to PENDING"
 
 	# ---------------------------------------------------------------------------------
 	$scope.member = share.Employees.findOne {name: "Sebastian Krämer"}
