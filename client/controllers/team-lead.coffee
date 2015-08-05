@@ -2,31 +2,36 @@ _ = lodash
 
 angular.module('app').controller 'teamLeadCtrl', ['$scope', '$meteor', '$window', 'uiCalendarConfig', '$timeout', ($scope, $meteor, $window, uiCalendarConfig, $timeout) ->
 	updateEvents = () ->
-		$scope.requests = []
+		console.log "updateEvents"
+		$scope.pendingRequests = []
+		$scope.acceptedRequests = []
 		# empty arrays, without setting new reference
 		pendingEvents.events.splice(0, pendingEvents.events.length)
 		acceptedEvents.events.splice(0, acceptedEvents.events.length)
 
-		myTeamRequests = $scope.Teams.leadTeamsRequests $scope.member._id
-
+		myTeamRequests = $scope.TeamUtils.leadTeamsRequests $scope.leadId
+		console.log myTeamRequests
 		for r in myTeamRequests
 			# add full member object to request
 			r.member = share.Employees.findOne(r.memberRef)
 			# find teams of memeber and lead
-			r.teamsOfLead = $scope.Teams.findTeamsOfLeadAndMember $scope.member._id, r.member._id
+			r.teamsOfLead = $scope.TeamUtils.findTeamsOfLeadAndMember $scope.leadId, r.memberRef
 			# find members teams not of this lead
-			memberTeams = $scope.Teams.memberTeams r.member._id
+			memberTeams = $scope.TeamUtils.memberTeams r.memberRef
 			r.otherTeams = _.reject memberTeams, (t) -> _.some(r.teamsOfLead, (tt) -> tt._id == t._id)
 			# add request to lists
 			if r.from
-				event = $scope.Requests.createCalendarEvent r
+				event = $scope.RequestUtils.createCalendarEvent r
 
-				if $scope.Requests.isPending(r._id, r.teamsOfLead)
-					$scope.requests.push r
+				if $scope.RequestUtils.isPending(r._id, memberTeams)
+					$scope.pendingRequests.push r
 					pendingEvents.events.push event
+					console.log "add #{r.name} to PENDING"
 				
-				if $scope.Requests.isAccepted(r._id, r.teamsOfLead)
+				if $scope.RequestUtils.isAccepted(r._id, memberTeams)
+					$scope.acceptedRequests.push r
 					acceptedEvents.events.push event
+					console.log "add #{r.name} to ACCEPTED"
 
 	$scope.requestDuration = (request) ->
 		# FIXME, count only workdays
@@ -35,11 +40,11 @@ angular.module('app').controller 'teamLeadCtrl', ['$scope', '$meteor', '$window'
 		moment.duration(toMoment.diff(fromMoment)).days()
 
 	$scope.acceptRequest = (request) ->
-		$scope.Requests.accept request._id, request.teamsOfLead
+		$scope.RequestUtils.accept request._id, request.teamsOfLead
 		updateEvents()
 	
 	$scope.denyRequest = (requestUI) ->
-		$scope.Requests.deny request._id, request.teamsOfLead
+		$scope.RequestUtils.deny request._id, request.teamsOfLead
 		updateEvents()
 
 	pendingEvents = 
@@ -61,16 +66,16 @@ angular.module('app').controller 'teamLeadCtrl', ['$scope', '$meteor', '$window'
 				center: ''
 				right: 'today prev,next'
 
-	$scope.Teams = new share.Teams($meteor)
-	$scope.Requests = new share.Requests($meteor)
-	requests = $scope.$meteorCollection(share.Requests)
+	$scope.TeamUtils = new share.TeamUtils($meteor)
+	$scope.RequestUtils = new share.RequestUtils($meteor)
 	if Meteor.user().username == 'olaf'
 		$scope.member = share.Employees.findOne {name: "Olaf von Dühren"}
 	else
 		$scope.member = share.Employees.findOne {name: "Rafael Velásquez"}
 	console.log "member (lead): #{$scope.member.name}"
+	$scope.leadId = $scope.member._id
 
-	$scope.myTeams = $scope.Teams.leadTeams $scope.member._id
+	$scope.myTeams = $scope.TeamUtils.leadTeams $scope.leadId
 	updateEvents()
 	$scope.maxPrio = 3
 ]

@@ -1,6 +1,7 @@
 # teams class
+_ = lodash
 
-share.Teams = class Teams
+share.TeamUtils = class TeamUtils
 	constructor: (@angularMeteor) ->
 		@allTeams = @angularMeteor.collection share.Teams
 		@allRequests = @angularMeteor.collection share.Requests
@@ -18,14 +19,15 @@ share.Teams = class Teams
 		_.filter(@leadTeams(leadId), (t) -> if t.members? then _.some(t.members, (m) -> m._id == memberId))
 
 	leadTeams: (leadId) ->
-		@allTeams.find {"lead._id": leadId}
+		@angularMeteor.collection () -> share.Teams.find {"lead._id": leadId}
 
 	memberTeams: (memberId) ->
-		@allTeams.find {members: { $elemMatch: {_id: memberId}}}
+		@angularMeteor.collection () -> share.Teams.find {members: { $elemMatch: {_id: memberId}}}
 
 	leadTeamMembers: (leadId) ->
 		_(@leadTeams(leadId)).map((t)-> _.map(t.members, (m)-> m._id)).flatten().value()
 
 	leadTeamsRequests: (leadId) ->
-		@allRequests.find {memberRef: {$in: @leadTeamMembers(leadId)}, to: {$gt: new Date()} }
-
+		ltm = @leadTeamMembers(leadId)
+		console.log ltm
+		@angularMeteor.collection () -> share.Requests.find {memberRef: {$in: ltm}, to: {$gt: new Date()} }

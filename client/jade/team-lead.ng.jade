@@ -14,7 +14,7 @@
 				.panel-heading My pending requests
 				.panel-body
 					ul.vacations.list-unstyled
-						li.vacation(ng-repeat="vacation in requests | filter : { state: 'pending'}")
+						li.vacation(ng-repeat="vacation in pendingRequests")
 							strong.vacation-name {{vacation.member.name}}
 							i.fa.fa-thumbs-o-down.pull-right(ng-click="denyRequest(vacation)")
 							i.fa.fa-thumbs-o-up.pull-right(ng-click="acceptRequest(vacation)")
@@ -31,8 +31,9 @@
 							ul.members
 								li.text-muted(ng-repeat="t in vacation.otherTeams") 
 									span {{ t.name }}
-									i.fa.fa-thumbs-o-down(ng-if="vacation[t._id].state=='denied'")
-									i.fa.fa-thumbs-o-up(ng-if="vacation[t._id].state=='accepted'")
+									i.fa.fa-thumbs-o-down(ng-if="vacation.responses[t._id].state=='denied'")
+									i.fa.fa-thumbs-o-up(ng-if="vacation.responses[t._id].state=='accepted'")
+									i.fa.fa-clock-o(ng-if="!vacation.responses[t._id] || vacation.responses[t._id].state=='pending'")
 
 		.col-md-9
 			.panel.panel-primary

@@ -1,7 +1,6 @@
 _ = lodash
 
 angular.module('app').controller 'memberDashboardCtrl', ['$scope', '$meteor', '$window', ($scope, $meteor, $window) ->
-	
 	$scope.hoveringOver = (value) ->
 		$scope.overStar = value
 
@@ -21,16 +20,8 @@ angular.module('app').controller 'memberDashboardCtrl', ['$scope', '$meteor', '$
 		updateEvents()
 
 	$scope.createRequest = () ->
-		newRequest = 
-			memberRef: $scope.member._id
-			name: $scope.newRequestName
-			from: $scope.vacationFrom
-			to: $scope.vacationTo
-			prio: $scope.prio
-			type: "vacation"
-			responses: {}
-
-		$scope.$meteorCollection(share.Requests).save(newRequest).then (inserts) ->
+		savePromise = $scope.RequestUtils.createNewRequest $scope.member._id, $scope.newRequestName, $scope.vacationFrom, $scope.vacationTo, $scope.prio
+		savePromise.then (inserts) ->
 			id = _.first(inserts)._id
 			console.log "inserted new request with id:#{id}"
 			# reset entry fields
@@ -40,7 +31,6 @@ angular.module('app').controller 'memberDashboardCtrl', ['$scope', '$meteor', '$
 			$scope.prio = null
 			updateEvents()
 		
-
 	updateEvents = () ->
 		# empty arrays, without setting new reference
 		pendingEvents.events.splice(0, pendingEvents.events.length)
@@ -51,6 +41,7 @@ angular.module('app').controller 'memberDashboardCtrl', ['$scope', '$meteor', '$
 
 		for r in _.filter(allRequests, (v) -> v.memberRef == $scope.member._id)
 			r.member = share.Employees.findOne(r.memberRef)
+			r.memberTeams = $scope.TeamUtils.memberTeams r.member._id
 			if r.from
 				event = 
 					id: r._id
@@ -60,22 +51,26 @@ angular.module('app').controller 'memberDashboardCtrl', ['$scope', '$meteor', '$
 					allDay: true
 
 				console.log r
-				# only one denied is enough to let a request fail
-				if _.some(r.teamsOfLead, (t) -> r.responses[t._id]? && r.responses[t._id].state == 'denied')
+
+				if $scope.RequestUtils.isDenied(r._id, r.memberTeams)
 					$scope.deniedRequests.push r
 					console.log "add #{r.name} to DENIED"
-				# all must be accepted to accept  request
-				else if _.every(r.teamsOfLead, (t) -> r.responses[t._id]? && r.responses[t._id].state == 'accepted')
+
+				else if $scope.RequestUtils.isAccepted(r._id, r.memberTeams)
 					acceptedEvents.events.push event
 					$scope.acceptedRequests.push r
 					console.log "add #{r.name} to ACCEPTED"
-				# all other should be pending...right?
-				else 
+				
+				else
 					pendingEvents.events.push event
 					$scope.pendingRequests.push r
 					console.log "add #{r.name} to PENDING"
+					
 
 	# ---------------------------------------------------------------------------------
+	$scope.TeamUtils = new share.TeamUtils($meteor)
+	$scope.RequestUtils = new share.RequestUtils($meteor)
+
 	$scope.member = share.Employees.findOne {name: "Sebastian Krämer"}
 	console.log "member: #{$scope.member}"
 	$scope.teams =  $scope.$meteorCollection () -> share.Teams.find {members: { $elemMatch: {_id: $scope.member._id}}}
@@ -99,7 +94,7 @@ angular.module('app').controller 'memberDashboardCtrl', ['$scope', '$meteor', '$
 		color: '#B8E297'
 		events: []
 	$scope.requestEventSources = [pendingEvents, acceptedEvents]
-	$scope.uiConfig =
+	$scope.calendarConfig =
 		calendar:
 			height: 500
 			editable: false

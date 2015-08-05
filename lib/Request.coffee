@@ -1,40 +1,40 @@
 # request class
 _ = lodash
 
-share.Requests = class Requests
+share.RequestUtils = class RequestUtils
 	constructor: (@angularMeteor) ->
 		@allTeams = @angularMeteor.collection share.Teams
 		@allRequests = @angularMeteor.collection share.Requests
 		@allEmployees = @angularMeteor.collection share.Employees
 
 	getRequest: (id) ->
-		$meteor.object share.Requests, id
+		@angularMeteor.object share.Requests, id
 
-	accept: (requestId, teamsOfLead) ->
-		@setResponse requestId, teamsOfLead, 'accepted'
+	accept: (requestId, teams) ->
+		@setResponse requestId, teams, 'accepted'
 
-	deny: (requestId, teamsOfLead) ->
-		@setResponse requestId, teamsOfLead, 'denied'
+	deny: (requestId, teams) ->
+		@setResponse requestId, teams, 'denied'
 
-	setResponse: (requestId, teamsOfLead, state) ->
-		for t in teamsOfLead
-			r = request.responses[t._id] || {}
-			r.state = state
-		console.log "#{state} request #{request.name} from #{request.member.name}"
+	setResponse: (requestId, teams, state) ->
+		request = @getRequest requestId
+		for t in teams
+			_.set request.responses, "#{t._id}.state" , state
+		request.save()
+		console.log request
+		console.log "#{state} request #{request.name} from #{request.memberRef}"
 
-	isAccepted: (requestId, teamsOfLead) ->
-		console.log "isAccepted:"
+	isAccepted: (requestId, teams) ->
 		r = @getRequest requestId
-		console.log r
-		_.every(teamsOfLead, (t) -> r.responses[t._id]? && r.responses[t._id].state == 'accepted')
+		_.every(teams, (t) -> r.responses[t._id]? && r.responses[t._id].state == 'accepted')
 
-	isPending: (requestId, teamsOfLead) ->
+	isPending: (requestId, teams) ->
 		#is this right??
-		not isDenied and not isAccepted
+		not @isDenied(requestId, teams) and not @isAccepted(requestId, teams)
 
-	isDenied: (requestId) ->
-		@getRequest requestId
-		_.some(teamsOfLead, (t) -> r.responses[t._id]? && r.responses[t._id].state == 'denied')
+	isDenied: (requestId, teams) ->
+		r = @getRequest requestId
+		_.some(teams, (t) -> r.responses[t._id]? && r.responses[t._id].state == 'denied')
 
 	createCalendarEvent: (request) ->
 		id: request._id
@@ -42,3 +42,14 @@ share.Requests = class Requests
 		start: request.from
 		end: request.to
 		allDay: true
+
+	createNewRequest: (memberId, name, from, to, prio) ->
+		newRequest = 
+			memberRef: memberId
+			name: name
+			from: from
+			to: to
+			prio: prio
+			type: "vacation"
+			responses: {}
+		@allRequests.save(newRequest)
