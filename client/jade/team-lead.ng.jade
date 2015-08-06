@@ -17,7 +17,7 @@
 						li.vacation(ng-repeat="vacation in pendingRequests")
 							strong {{vacation.member.name}}
 							i.fa.fa-thumbs-o-down.pull-right(ng-click="denyRequest(vacation)")
-							i.fa.fa-thumbs-o-up.pull-right(ng-click="acceptRequest(vacation)")
+							i.fa.fa-thumbs-o-up.accept-request.pull-right(ng-click="acceptRequest(vacation)")
 							.vacation-name {{vacation.name}}
 							.vacation-fromto {{vacation.from | date : format}} - {{vacation.to | date : format}} ({{ requestDuration(vacation)}} days)
 							.vacation-prio 
