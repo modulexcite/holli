@@ -9,7 +9,7 @@ angular.module('app').controller 'teamLeadCtrl', ['$scope', '$meteor', '$window'
 		pendingEvents.events.splice(0, pendingEvents.events.length)
 		acceptedEvents.events.splice(0, acceptedEvents.events.length)
 
-		myTeamRequests = $scope.TeamUtils.leadTeamsRequests $scope.leadId
+		myTeamRequests = _.map $scope.TeamUtils.leadTeamsRequests($scope.leadId), (r) -> angular.copy r
 		for r in myTeamRequests
 			# add full member object to request
 			r.member = share.Employees.findOne(r.memberRef)

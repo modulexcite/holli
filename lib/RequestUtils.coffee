@@ -19,12 +19,12 @@ share.RequestUtils = class RequestUtils
 
 	# set 'state' for request for some teams
 	setResponse: (requestId, teams, state, reason) ->
+		console.log teams
 		request = @getRequest requestId
 		for t in teams
 			_.set request.responses, "#{t._id}.state" , state
 			if reason
 				_.set request.responses, "#{t._id}.reason" , reason
-		console.log request
 		request.save()
 		console.log "#{state} request #{request.name} from #{request.memberRef}"
 
