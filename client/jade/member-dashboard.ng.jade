@@ -19,6 +19,13 @@
 							.vacation-fromto {{vacation.from | date : format}} - {{vacation.to | date : format}}
 							.vacation-prio 
 								rating(ng-model="vacation.prio", max="maxPrio", readonly)
+							span.left-space-5 Response Overview
+								ul.members
+									li(ng-repeat="t in teams") 
+										span.text-muted {{ t.name }}
+										i.left-space-5.fa.fa-thumbs-o-down(ng-if="vacation.responses[t._id].state=='denied'")
+										i.left-space-5.fa.fa-thumbs-o-up(ng-if="vacation.responses[t._id].state=='accepted'")
+										i.left-space-5.fa.fa-clock-o(ng-if="!vacation.responses[t._id] || vacation.responses[t._id].state=='pending'")
 
 			.panel.panel-primary
 				.panel-heading My denied requests
