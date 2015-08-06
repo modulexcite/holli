@@ -10,7 +10,6 @@ angular.module('app').controller 'teamLeadCtrl', ['$scope', '$meteor', '$window'
 		acceptedEvents.events.splice(0, acceptedEvents.events.length)
 
 		myTeamRequests = $scope.TeamUtils.leadTeamsRequests $scope.leadId
-		console.log myTeamRequests
 		for r in myTeamRequests
 			# add full member object to request
 			r.member = share.Employees.findOne(r.memberRef)
@@ -23,11 +22,15 @@ angular.module('app').controller 'teamLeadCtrl', ['$scope', '$meteor', '$window'
 			if r.from
 				event = $scope.RequestUtils.createCalendarEvent r
 
-				if $scope.RequestUtils.isPending(r._id, memberTeams)
+				# only show in pending list (todo list) for leads teams
+				if $scope.RequestUtils.isPending(r._id, r.teamsOfLead)
 					$scope.pendingRequests.push r
-					pendingEvents.events.push event
 					console.log "add #{r.name} to PENDING"
 				
+				# but show event in calendar, if pending in any team
+				if $scope.RequestUtils.isPending(r._id, memberTeams)
+					pendingEvents.events.push event
+
 				if $scope.RequestUtils.isAccepted(r._id, memberTeams)
 					$scope.acceptedRequests.push r
 					acceptedEvents.events.push event
@@ -44,8 +47,9 @@ angular.module('app').controller 'teamLeadCtrl', ['$scope', '$meteor', '$window'
 		updateEvents()
 	
 	$scope.denyRequest = (requestUI) ->
-		$scope.RequestUtils.deny request._id, request.teamsOfLead
-		updateEvents()
+		bootbox.prompt "Why is this denied?", (result) ->
+			$scope.RequestUtils.deny request._id, request.teamsOfLead
+			updateEvents()
 
 	pendingEvents = 
 		textColor: '#000'

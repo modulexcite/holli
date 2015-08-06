@@ -29,6 +29,7 @@
 							.vacation-fromto {{vacation.from | date : format}} - {{vacation.to | date : format}}
 							.vacation-prio 
 								rating(ng-model="vacation.prio", max="maxPrio", readonly)
+							.vacation-deny-reason.text-danger TODO
 
 			.panel.panel-primary
 				.panel-heading My successful requests

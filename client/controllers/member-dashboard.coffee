@@ -80,8 +80,8 @@ angular.module('app').controller 'memberDashboardCtrl', ['$scope', '$meteor', '$
 	$scope.maxDate = new Date(2020, 12, 31)
 	$scope.format = 'dd.MM.yyyy'
 	$scope.maxPrio = 3
-	$scope.vacationFrom = new Date(2015, 7, 2)
-	$scope.vacationTo = new Date(2015, 7, 5)
+	$scope.vacationFrom = new Date(2015, 7, 10)
+	$scope.vacationTo = new Date(2015, 7, 20)
 	$scope.dateOptions =
 		formatYear: 'yy'
 		startingDay: 1

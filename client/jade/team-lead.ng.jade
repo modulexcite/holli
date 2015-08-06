@@ -15,25 +15,26 @@
 				.panel-body
 					ul.vacations.list-unstyled
 						li.vacation(ng-repeat="vacation in pendingRequests")
-							strong.vacation-name {{vacation.member.name}}
+							strong {{vacation.member.name}}
 							i.fa.fa-thumbs-o-down.pull-right(ng-click="denyRequest(vacation)")
 							i.fa.fa-thumbs-o-up.pull-right(ng-click="acceptRequest(vacation)")
 							.vacation-name {{vacation.name}}
 							.vacation-fromto {{vacation.from | date : format}} - {{vacation.to | date : format}} ({{ requestDuration(vacation)}} days)
 							.vacation-prio 
 								rating(ng-model="vacation.prio", max="maxPrio", readonly)
-							span Your Teams
-							ul.members
-								li.text-muted(ng-repeat="t in vacation.teamsOfLead") 
-									span {{ t.name }}
+							.team-overview
+								span Your Teams
+								ul.members
+									li.text-muted(ng-repeat="t in vacation.teamsOfLead") 
+										span {{ t.name }}
 
-							span Other Teams
-							ul.members
-								li.text-muted(ng-repeat="t in vacation.otherTeams") 
-									span {{ t.name }}
-									i.fa.fa-thumbs-o-down(ng-if="vacation.responses[t._id].state=='denied'")
-									i.fa.fa-thumbs-o-up(ng-if="vacation.responses[t._id].state=='accepted'")
-									i.fa.fa-clock-o(ng-if="!vacation.responses[t._id] || vacation.responses[t._id].state=='pending'")
+								span Other Teams
+								ul.members
+									li(ng-repeat="t in vacation.otherTeams") 
+										span.text-muted {{ t.name }}
+										i.left-space-5.fa.fa-thumbs-o-down(ng-if="vacation.responses[t._id].state=='denied'")
+										i.left-space-5.fa.fa-thumbs-o-up(ng-if="vacation.responses[t._id].state=='accepted'")
+										i.left-space-5.fa.fa-clock-o(ng-if="!vacation.responses[t._id] || vacation.responses[t._id].state=='pending'")
 
 		.col-md-9
 			.panel.panel-primary
