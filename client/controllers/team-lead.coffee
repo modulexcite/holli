@@ -46,10 +46,10 @@ angular.module('app').controller 'teamLeadCtrl', ['$scope', '$meteor', '$window'
 		$scope.RequestUtils.accept request._id, request.teamsOfLead
 		updateEvents()
 	
-	$scope.denyRequest = (requestUI) ->
-		bootbox.prompt "Why is this denied?", (result) ->
-			$scope.RequestUtils.deny request._id, request.teamsOfLead
-			updateEvents()
+	$scope.denyRequest = (request) ->
+		reason = $window.prompt "Why is this denied?"
+		$scope.RequestUtils.deny request._id, request.teamsOfLead, reason
+		updateEvents()
 
 	pendingEvents = 
 		textColor: '#000'

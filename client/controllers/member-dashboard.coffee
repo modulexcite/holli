@@ -50,9 +50,8 @@ angular.module('app').controller 'memberDashboardCtrl', ['$scope', '$meteor', '$
 					end: r.to
 					allDay: true
 
-				console.log r
-
 				if $scope.RequestUtils.isDenied(r._id, r.memberTeams)
+					r.denyReasons = $scope.RequestUtils.getDenyReasons r
 					$scope.deniedRequests.push r
 					console.log "add #{r.name} to DENIED"
 

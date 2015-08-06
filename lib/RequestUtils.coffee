@@ -24,6 +24,7 @@ share.RequestUtils = class RequestUtils
 			_.set request.responses, "#{t._id}.state" , state
 			if reason
 				_.set request.responses, "#{t._id}.reason" , reason
+		console.log request
 		request.save()
 		console.log "#{state} request #{request.name} from #{request.memberRef}"
 
@@ -58,4 +59,13 @@ share.RequestUtils = class RequestUtils
 			prio: prio
 			type: "vacation"
 			responses: {}
-		@allRequests.save(newRequest)
+		@allRequests.save newRequest
+
+	getDenyReasons: (request) ->
+		ret = []
+		i = 0
+		for k, v of request.responses
+			if v.state == 'denied'
+				t = share.Teams.findOne k
+				ret.push {id: i++, reason: v.reason, team: t.name}
+		ret
