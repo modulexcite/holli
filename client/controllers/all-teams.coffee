@@ -11,7 +11,7 @@ angular.module('app').controller 'allTeamsCtrl', ['$scope', '$meteor', '$window'
 	
 	matches = (text) -> 
 		if text?
-			r = new RegExp $scope.search
+			r = new RegExp $scope.search, 'i'
 			text.match r
 		else
 			false
