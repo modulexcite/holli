@@ -30,6 +30,11 @@ app.config ['$stateProvider', '$urlRouterProvider', '$locationProvider', ($state
 			templateUrl: 'client/jade/team-lead.html'
 			controller: 'teamLeadCtrl'
 			resolve: userResolve
+		.state 'all-teams',
+			url: '/all-teams'
+			templateUrl: 'client/jade/all-teams.html'
+			controller: 'allTeamsCtrl'
+			resolve: userResolve
 		.state 'login',
 			url: '/login'
 			templateUrl: 'client/jade/login.html'
