@@ -11,7 +11,6 @@ Meteor.startup () ->
 			username: "rafi"
 			password: "rafi"
 
-
 	# not used, was for init...
 	if share.Employees.find().count() == 0
 		fs = Npm.require 'fs'

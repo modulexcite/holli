@@ -38,10 +38,7 @@ angular.module('app').controller 'teamLeadCtrl', ['$scope', '$meteor', '$window'
 					console.log "add #{r.name} to ACCEPTED"
 
 	$scope.requestDuration = (request) ->
-		# FIXME, count only workdays
-		fromMoment = moment(request.from.toISOString())
-		toMoment = moment(request.to.toISOString())
-		moment.duration(toMoment.diff(fromMoment)).days()
+		$scope.RequestUtils.requestDuration request
 
 	$scope.acceptRequest = (request) ->
 		$scope.RequestUtils.accept request._id, request.teamsOfLead

@@ -61,6 +61,7 @@ share.RequestUtils = class RequestUtils
 			responses: {}
 		@allRequests.save newRequest
 
+	# get array with reason and team of denied request
 	getDenyReasons: (request) ->
 		ret = []
 		i = 0
@@ -69,3 +70,19 @@ share.RequestUtils = class RequestUtils
 				t = share.Teams.findOne k
 				ret.push {id: i++, reason: v.reason, team: t.name}
 		ret
+
+	# calculcate days of work for the given request (no sa/so and no feiertage are counted)
+	requestDuration: (request) ->
+		fromMoment = moment(request.from.toISOString())
+		toMoment = moment(request.to.toISOString())
+		workDays = 0
+		cursor = fromMoment
+		while cursor.isBefore(toMoment, 'day') and !@isFeierTag(cursor)
+			cursor.add(1, 'd')
+			if cursor.day() in [1,2,3,4,5]
+				workDays++
+		workDays
+
+	isFeierTag: (date) ->
+		# TODO: calc feiertage
+		false
