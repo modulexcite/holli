@@ -4,14 +4,15 @@
 			.panel.panel-primary
 				.panel-heading Teams
 				.panel-body
-					h3 Teams
 					ul.teams.list-unstyled
 						li.team(ng-repeat="team in teams", ng-class="{'selected':team.selected}", ng-click="selectTeam(team)")
 							strong.team-name {{team.name}}
-							i.pull-right.fa.fa-trash-o(ng-click="deleteTeam(team)")
+							i.pull-right.fa.fa-lg.fa-trash-o(ng-click="deleteTeam(team)")
 							.team-lead {{team.lead.name}}
 
-					h3 New Team
+			.panel.panel-info
+				.panel-heading Create Team
+				.panel-body
 					form.new-team
 						.form-group
 							label(for='name') Name 
@@ -28,12 +29,11 @@
 			.panel.panel-primary
 				.panel-heading Members
 				.panel-body
-					h3 Members
 					ul.list-group
 						li.list-group-item(ng-repeat="member in currentTeam.members")
 							span {{member.name}}
 							button.btn.btn-danger.btn-xs.pull-right(ng-click="removeMember(member)")
-								span.glyphicon.glyphicon-trash
+								i.fa.fa-lg.fa-trash-o
 					.col-md-10
 						input.form-control(type="text", ng-model="newMember", typeahead="member as member.name for member in employees | filter:$viewValue | limitTo:10", placeholder="New team member...")
 					.col-md-2
