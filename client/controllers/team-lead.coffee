@@ -22,8 +22,8 @@ angular.module('app').controller 'teamLeadCtrl', ['$scope', '$meteor', '$window'
 			if r.from
 				event = $scope.RequestUtils.createCalendarEvent r
 
-				# only show in pending list (todo list) for leads teams
-				if $scope.RequestUtils.isPending(r._id, r.teamsOfLead)
+				# only show in pending list (todo list) for leads teams that are not already denied by any other teams
+				if $scope.RequestUtils.isPending(r._id, r.teamsOfLead) and not $scope.RequestUtils.isDenied(r._id, memberTeams)
 					$scope.pendingRequests.push r
 					console.log "add #{r.name} to PENDING (lead teams)"
 				

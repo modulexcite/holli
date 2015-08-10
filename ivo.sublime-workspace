@@ -4,65 +4,68 @@
 		"selected_items":
 		[
 			[
-<<<<<<< HEAD
-				"re",
-				"requests"
+				"from",
+				"fromMoment"
 			],
 			[
 				"mem",
+				"memberRef"
+			],
+			[
+				"me",
 				"members"
 			],
 			[
 				"te",
-				"teamLeadCtrl"
+				"teams"
 			],
 			[
 				"col",
-				"col-md-3"
+				"col-md-2"
+			],
+			[
+				"le",
+				"length"
+			],
+			[
+				"acc",
+				"acceptedEvents"
+			],
+			[
+				"pe",
+				"pendingEvents"
+			],
+			[
+				"eve",
+				"events"
 			],
 			[
 				"for",
-				"form-control"
+				"forin	Array Comprehension"
+			],
+			[
+				"requ",
+				"requestEvents"
+			],
+			[
+				"req",
+				"requestEvents"
+			],
+			[
+				"re",
+				"request"
+			],
+			[
+				"REQUESTS",
+				"requests"
 			],
 			[
 				"new",
-				"newRequestName"
+				"newRequest"
 			],
 			[
-				"v",
-				"vacation"
-			],
-			[
-				"newm",
-				"newmember"
-			],
-			[
-				"sele",
-				"selectTeam"
-			],
-			[
-				"team",
-				"teamlead"
-			],
-			[
-				"Empl",
-				"employee"
-			],
-			[
-				"ne",
-				"newteamlead"
-			],
-			[
-				"newt",
-				"newteamname"
-			],
-			[
-				"all",
-				"allowOnlyLoginUsers"
-=======
-				"new",
-				"newValue"
->>>>>>> origin/master
+				"margin",
+				"margin-bottom"
 			],
 			[
 				"fix",
@@ -201,6 +204,10 @@
 				"ng-click"
 			],
 			[
+				"sele",
+				"selectChapter"
+			],
+			[
 				"con",
 				"content"
 			],
@@ -227,10 +234,6 @@
 			[
 				"gr",
 				"groupedByKey"
-			],
-			[
-				"req",
-				"require"
 			],
 			[
 				"sho",
@@ -341,104 +344,115 @@
 	"buffers":
 	[
 		{
-<<<<<<< HEAD
-			"file": "server/server.coffee",
+			"file": "client/jade/team-lead.ng.jade",
 			"settings":
 			{
-				"buffer_size": 561,
-				"line_ending": "Unix"
+				"buffer_size": 1775,
+				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "client/jade/index.jade",
+			"file": "client/lib/focus.coffee",
 			"settings":
 			{
-				"buffer_size": 980,
-				"line_ending": "Unix"
+				"buffer_size": 510,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "client/controllers/teams-config.coffee",
+			"settings":
+			{
+				"buffer_size": 1698,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/D/sync/TraPac/MSC/cranewait.msc",
+			"settings":
+			{
+				"buffer_size": 2543,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/C/tmp/testmap.coffee",
+			"settings":
+			{
+				"buffer_size": 244,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "README.md",
+			"settings":
+			{
+				"buffer_size": 229,
+				"line_ending": "Windows"
 			}
 		},
 		{
 			"file": "client/jade/member-dashboard.ng.jade",
 			"settings":
 			{
-				"buffer_size": 2541,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "client/client.coffee",
-			"settings":
-			{
-				"buffer_size": 4282,
-				"line_ending": "Unix"
-=======
-			"contents": "# meteor accounts config\nAccounts.ui.config\n	passwordSignupFields: 'USERNAME_ONLY'\n\n# angular\napp = angular.module 'app', ['angular-meteor', 'ui.router', 'ui.bootstrap']\n\n# routes\nuserResolve = \n				\"currentUser\": [\n					\"$meteor\", ($meteor) ->\n						$meteor.requireUser()\n				]\n\napp.config ['$stateProvider', '$urlRouterProvider', '$locationProvider', ($stateProvider, $urlRouterProvider, $locationProvider) ->\n	$stateProvider\n		.state 'teams-config',\n			url: '/teams-config'\n			templateUrl: 'client/jade/teams-config.html'\n			controller: 'teamsConfigCtrl'\n			resolve: userResolve\n		.state 'member-dashboard',\n			url: '/member-dashboard'\n			templateUrl: 'client/jade/member-dashboard.html'\n			controller: 'memberDashboardCtrl'\n			resolve: userResolve\n		.state 'team-lead',\n			url: '/team-lead'\n			templateUrl: 'client/jade/team-lead.html'\n			controller: 'teamLeadCtrl'\n			resolve: userResolve\n		.state 'login',\n			url: '/login'\n			templateUrl: 'client/jade/login.html'\n			\n	$urlRouterProvider.otherwise '/teams-config'\n	$locationProvider.html5Mode true\n]\n\napp.run ['$rootScope', '$state', ($rootScope, $state) ->\n	Accounts.onLogin () -> $state.go 'member-dashboard'\n	accountsUIBootstrap3.logoutCallback = () -> $state.go 'login'\n	$rootScope.$on '$stateChangeError', (event, toState, toParams, fromState, fromParams, error) ->\n		# We can catch the error thrown when the $requireUser promise is rejected\n		# and redirect the user back to the main page\n		if error == 'AUTH_REQUIRED'\n			$state.go 'login'\n]\n\napp.controller 'teamsConfigCtrl', ['$scope', '$meteor', '$window', ($scope, $meteor, $window) ->\n	registerWatch()\n\n	$scope.selectTeam = (team) ->\n		console.log \"select team: #{team.name}\"\n		for t in $scope.teams\n			t.selected = false\n		team.selected = true\n		$scope.currentTeam = team\n\n\n	$scope.employees = $scope.$meteorCollection(share.Employees)\n	$scope.teams = $scope.$meteorCollection(share.Teams)\n	console.log $scope.teams\n	if $scope.teams.length > 0\n		$scope.selectTeam($scope.teams[0])\n\n	registerWatch = () ->\n		$scope.watchTeamName = $scope.$watch 'newteamname', ((oldValue, newValue) ->\n				if not _.isEqual oldValue, newValue\n					# check for name existance\n					f = $scope.$meteorCollection(() -> share.Teams.findOne({name: $scope.newValue}))\n					$scope.teamNameNotUnique = f?\n			), true\n\n	$scope.deleteTeam = (team) ->\n		if $window.confirm 'Wirklich löschen?'\n			console.log \"archive id: #{family._id}\"\n\n	$scope.createTeam = (teamname, teamlead) ->\n		$scope.$meteorCollection(share.Teams).save\n			name: teamname\n			lead: \n				_id: teamlead._id\n				name: teamlead.name\n			undersigners: []\n			members: []\n\n	$scope.addMember = (newmember) ->\n		console.log \"add new member: #{newmember.name}\"\n		if $scope.currentTeam\n			$scope.currentTeam.members.push \n				_id: newmember._id\n				name: newmember.name\n		$scope.newMember = null\n\n	$scope.removeMember = (member) ->\n		console.log \"remove member: #{member.name}\"\n		if $scope.currentTeam\n			_remove $scope.currentTeam.members, member\n]\n\napp.controller 'memberDashboardCtrl', ['$scope', '$meteor', '$window', ($scope, $meteor, $window) ->\n	$scope.member = $scope.$meteorCollection(() -> share.Employees.find({name: \"Sebastian Krämer\"}))\n	$scope.teams = _.filter($scope.$meteorCollection(share.Teams), (t) -> _.some(t.members, (m) -> m._id==$scope.member._id))\n	console.log $scope.member\n	#$scope.member = _.find $scope.$meteorCollection(share.Employees), (e) -> e.name == \"Sebastian Krämer\"\n	$scope.minDate = new Date()\n	$scope.maxDate = new Date(2020, 12, 31)\n	$scope.format = 'dd.MM.yyyy'\n	$scope.maxPrio = 3\n	$scope.dateOptions =\n		formatYear: 'yy'\n		startingDay: 1\n\n	$scope.hoveringOver = (value) ->\n		$scope.overStar = value\n\n	$scope.openFrom = ($event) ->\n		$event.preventDefault()\n		$event.stopPropagation()\n		$scope.openedFrom = true\n\n	$scope.openTo = ($event) ->\n		$event.preventDefault()\n		$event.stopPropagation()\n		$scope.openedTo = true\n\n	$scope.createRequest = () ->\n		$scope.member.vacations.push\n			name: $scope.newRequestName\n			from: $scope.vacationFrom\n			to: $scope.vacationTo\n			prio: $scope.prio\n			state: \"pending\"\n		$scope.newRequestName = \"\"\n		$scope.vacationFrom = null\n		$scope.vacationTo = null\n		$scope.prio = null\n]\n\napp.controller 'teamLeadCtrl', ['$scope', '$meteor', '$window', ($scope, $meteor, $window) ->\n	employees = $scope.$meteorCollection(share.Employees)\n	$scope.member = _.find employees, (e) -> e.name == \"Olaf von Dühren\"\n	$scope.teams = _.filter($scope.$meteorCollection(share.Teams), (t) -> t.lead._id == $scope.member._id)\n	$scope.requests = []\n	for t in $scope.teams\n		for m in t.members\n			e = _.find employees, (e) -> e._id == m._id\n			console.log \"found my team member: #{e.name}\"\n			for r in _.filter(e.vacations, (v) -> v.state == \"pending\")\n				r.member = e\n				$scope.requests.push r\n]",
-			"file": "client/client.coffee",
-			"file_size": 4958,
-			"file_write_time": 130816113178596290,
-			"settings":
-			{
-				"buffer_size": 4799,
+				"buffer_size": 3872,
 				"line_ending": "Windows"
->>>>>>> origin/master
 			}
 		},
 		{
-			"file": "client/jade/team-lead.ng.jade",
+			"file": "client/controllers/member-dashboard.coffee",
 			"settings":
 			{
-				"buffer_size": 898,
-<<<<<<< HEAD
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "client/styles/main.styl",
-			"settings":
-			{
-				"buffer_size": 261,
-				"line_ending": "Unix"
-=======
+				"buffer_size": 3372,
 				"line_ending": "Windows"
->>>>>>> origin/master
 			}
 		},
 		{
-			"file": "client/jade/teams-config.ng.jade",
+			"file": "lib/RequestUtils.coffee",
 			"settings":
 			{
-<<<<<<< HEAD
-				"buffer_size": 1515,
-				"line_ending": "Unix",
-				"name": ".container-fluid"
+				"buffer_size": 2532,
+				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "client/jade/tags.ng.jade",
+			"file": "client/jade/index.jade",
 			"settings":
 			{
-				"buffer_size": 504,
-				"line_ending": "Unix"
+				"buffer_size": 1089,
+				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "client/jade/eine.ng.jade",
+			"file": "server/server.coffee",
 			"settings":
 			{
-				"buffer_size": 5132,
-				"line_ending": "Unix"
+				"buffer_size": 688,
+				"line_ending": "Windows"
 			}
 		},
 		{
 			"file": "lib/config.coffee",
 			"settings":
 			{
-				"buffer_size": 547,
-				"line_ending": "Unix"
-=======
-				"buffer_size": 1634,
+				"buffer_size": 684,
 				"line_ending": "Windows"
->>>>>>> origin/master
+			}
+		},
+		{
+			"file": "client/jade/teams-config.ng.jade",
+			"settings":
+			{
+				"buffer_size": 1736,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "client/styles/main.styl",
+			"settings":
+			{
+				"buffer_size": 1294,
+				"line_ending": "Windows"
 			}
 		}
 	],
@@ -477,7 +491,7 @@
 	"build_varint": "",
 	"command_palette":
 	{
-		"height": 247.0,
+		"height": 392.0,
 		"last_filter": "inst",
 		"selected_items":
 		[
@@ -502,7 +516,7 @@
 				"Preferences: Browse Packages"
 			]
 		],
-		"width": 568.0
+		"width": 528.0
 	},
 	"console":
 	{
@@ -524,28 +538,16 @@
 	},
 	"expanded_folders":
 	[
-<<<<<<< HEAD
-		"/Users/basti/Development/meteor/ivo",
-		"/Users/basti/Development/meteor/ivo/client",
-		"/Users/basti/Development/meteor/ivo/client/jade",
-		"/Users/basti/Development/meteor/ivo/lib",
-		"/Users/basti/Development/meteor/ivo/private",
-		"/Users/basti/Development/meteor/ivo/server"
+		"/D/sync/_private/devel/ivo",
+		"/D/sync/_private/devel/ivo/client",
+		"/D/sync/_private/devel/ivo/client/lib"
 	],
 	"file_history":
 	[
-		"/Users/basti/Development/meteor/ivo/server/gb20.json",
-		"/Users/basti/Development/meteor/ivo/client/jade/member-dashboard.ng.jade",
-		"/Users/basti/Development/meteor/ivo/client/jade/member-dashboard.ng.html",
-		"/Users/basti/Development/meteor/ivo/client/jade/eine.ng.jade",
-=======
-		"/D/sync/_private/devel/ivo"
-	],
-	"file_history":
-	[
+		"/D/projects/syncrotess/web/hub-webdepot/trunk/server/config/config.global.coffee",
+		"/D/sync/_private/devel/ivo/client/client.coffee",
 		"/D/projects/CTB/vc/TwinVC-trunk/Client/VCClient/bin/Debug/Log/VCClient_FN199_20150717.log.0",
 		"/D/projects/CTB/vc/TwinVC-trunk/Client/VCClient/bin/Debug/Log/VCClient_FN199_20150717.log.1",
->>>>>>> origin/master
 		"/Users/basti/Development/meteor/kita-families/fix-fon.coffee",
 		"/Users/basti/Development/meteor/kita-families/README.md",
 		"/Users/basti/Development/meteor/kita-families/.meteor/local/build/programs/server/npm/mongo/node_modules/mongodb/node_modules/readable-stream/transform.js",
@@ -669,17 +671,11 @@
 		"/Users/basti/Library/Application Support/Sublime Text 3/Packages/User/Preferences.sublime-settings",
 		"/Users/basti/Development/web/mo-edit/client/public/bower/jquery-ui/ui/effect-drop.js",
 		"/Users/basti/Development/web/mo-edit/server/controllers/documents/index.coffee",
-<<<<<<< HEAD
 		"/Users/basti/Development/web/mo-edit/node_modules/mongoose/node_modules/mpromise/test/promises.Aplus.js"
-=======
-		"/Users/basti/Development/web/mo-edit/node_modules/mongoose/node_modules/mpromise/test/promises.Aplus.js",
-		"/Users/basti/Development/web/mo-edit/node_modules/log4js/test/fileAppender-test.js",
-		"/Users/basti/Development/web/mo-edit/node_modules/gulp/node_modules/vinyl-fs/node_modules/graceful-fs/test/max-open.js"
->>>>>>> origin/master
 	],
 	"find":
 	{
-		"height": 35.0
+		"height": 29.0
 	},
 	"find_in_files":
 	{
@@ -693,68 +689,22 @@
 		"case_sensitive": false,
 		"find_history":
 		[
-<<<<<<< HEAD
-			"config",
-			"vacation",
-			"memberDashboardCtrl",
-			"team",
-			"from",
-			"function",
-			"to",
-			"from",
-			"name",
-			"Bis",
-			"Name",
-			"newRequestName",
-			"team",
-			"removeMember",
-			"newundersigner",
-			"Employees",
-			"Families",
-			"member",
-			"undersigner",
-			"newundersigner",
-			"undersigners",
-			"newundersigner",
-			"undersigner",
-			"\napp.controller 'teamsConfigCtrl', ['$scope', '$meteor', '$window', ($scope, $meteor, $window) ->\n	$scope.currentTeam = null\n	$scope.employees = $meteor.collection(share.Employees)\n	$scope.teams = $meteor.collection(share.Teams)\n	$scope.deleteTeam = (team) ->\n		if $window.confirm 'Wirklich löschen?'\n			console.log \"archive id: #{family._id}\"\n	$scope.createTeam = (teamname, teamlead) ->\n		$scope.teams.insert\n			name: teamname\n			lead: teamlead\n			undersigners: []\n			members: []\n]",
-			"memberDashboardCtrl",
-			"teams-config",
-			"us",
-			"newUndersigner",
-			"teamsConfigCtrl",
-			"UNdersigner",
-			"member",
-			"employee",
-			"employees",
-			"team",
-			"name",
-			"Vorname",
-			"lead",
-			"Vorname",
-			"mamaVorname",
+			"{id: 1},",
 			"Teams",
-			"well",
-			"team",
-			"archivieren",
-			"family",
+			"updateRequests",
+			"from",
+			"r",
+			"Employees",
 			"employees",
-			"Employees",
-			"employee",
-			"Employees",
-			"Families",
-			"families",
-			"alle",
-			"false",
-			"family",
-			"db",
-			"Families",
-			"families",
-			"Families",
-=======
+			"member.vacations",
+			"scope",
+			".vacation\n  background: #ddd\n  margin-top: 3px\n  margin-bottom: 3px\n  padding: 5px",
+			"col-md-4",
+			"\n	",
+			"$meteor",
+			"$window",
 			"addHoursForm",
 			"$meteor.collection",
->>>>>>> origin/master
 			".0",
 			"papa",
 			"mama",
@@ -825,9 +775,6 @@
 			"templateUrl",
 			"Parties",
 			"party",
-<<<<<<< HEAD
-			"parties"
-=======
 			"parties",
 			"\"",
 			"families_in",
@@ -869,22 +816,7 @@
 			".sidebar-button",
 			"value",
 			"newText",
-			"$scope.newCommentText",
-			"newCommentText",
-			"myScope",
-			"\"",
-			".detailactionbutton",
-			"TIME",
-			"colourRed",
-			"addComment",
-			"taSelection",
-			"docLastChangeDate",
-			"md-4",
-			"(++)\n",
-			".catch (e) ->",
-			"author.name",
-			"Author.name"
->>>>>>> origin/master
+			"$scope.newCommentText"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -902,172 +834,24 @@
 	"groups":
 	[
 		{
-<<<<<<< HEAD
-			"selected": 2,
-=======
-			"selected": 0,
->>>>>>> origin/master
+			"selected": 8,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-<<<<<<< HEAD
-					"file": "server/server.coffee",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 561,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								218,
-								218
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Better CoffeeScript/CoffeeScript.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 8,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "client/jade/index.jade",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 980,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								842,
-								842
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Jade/Syntaxes/Jade.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 3,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "client/jade/member-dashboard.ng.jade",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 2541,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1012,
-								997
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Jade/Syntaxes/Jade.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 421.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-=======
->>>>>>> origin/master
-					"file": "client/client.coffee",
-					"semi_transient": false,
-					"settings":
-					{
-<<<<<<< HEAD
-						"buffer_size": 4282,
-=======
-						"buffer_size": 4799,
->>>>>>> origin/master
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-<<<<<<< HEAD
-								3064,
-								3064
-=======
-								3115,
-								3115
->>>>>>> origin/master
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Better CoffeeScript/CoffeeScript.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-<<<<<<< HEAD
-						"translation.y": 1388.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 4,
-=======
-						"translation.y": 1706.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
->>>>>>> origin/master
 					"file": "client/jade/team-lead.ng.jade",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 898,
+						"buffer_size": 1775,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-<<<<<<< HEAD
-								466,
-								799
-=======
-								0,
-								0
->>>>>>> origin/master
+								1775,
+								1775
 							]
 						],
 						"settings":
@@ -1079,30 +863,30 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 2,
+					"stack_index": 6,
 					"type": "text"
 				},
 				{
-<<<<<<< HEAD
-					"buffer": 5,
-					"file": "client/styles/main.styl",
+					"buffer": 1,
+					"file": "client/lib/focus.coffee",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 261,
+						"buffer_size": 510,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								176,
-								176
+								510,
+								510
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/Stylus/Stylus.tmLanguage",
+							"auto_name": "",
+							"syntax": "Packages/Better CoffeeScript/CoffeeScript.tmLanguage",
 							"tab_size": 2,
 							"translate_tabs_to_spaces": true
 						},
@@ -1114,61 +898,221 @@
 					"type": "text"
 				},
 				{
-					"buffer": 6,
-=======
 					"buffer": 2,
->>>>>>> origin/master
-					"file": "client/jade/teams-config.ng.jade",
+					"file": "client/controllers/teams-config.coffee",
 					"semi_transient": false,
 					"settings":
 					{
-<<<<<<< HEAD
-						"buffer_size": 1515,
+						"buffer_size": 1698,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								553,
-								553
+								144,
+								144
 							]
 						],
 						"settings":
 						{
-							"auto_name": ".container-fluid",
-							"syntax": "Packages/Jade/Syntaxes/Jade.tmLanguage"
+							"syntax": "Packages/Better CoffeeScript/CoffeeScript.tmLanguage",
+							"translate_tabs_to_spaces": false
 						},
-						"translation.x": 17.0,
+						"translation.x": 0.0,
 						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "/D/sync/TraPac/MSC/cranewait.msc",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2543,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1508,
+								1508
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/User/msc.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": -0.0,
+						"translation.y": 300.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 7,
 					"type": "text"
 				},
 				{
-					"buffer": 7,
-					"file": "client/jade/tags.ng.jade",
+					"buffer": 4,
+					"file": "/C/tmp/testmap.coffee",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 504,
-=======
-						"buffer_size": 1634,
->>>>>>> origin/master
+						"buffer_size": 244,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-<<<<<<< HEAD
-								504,
-								504
-=======
-								240,
-								240
->>>>>>> origin/master
+								244,
+								244
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Better CoffeeScript/CoffeeScript.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 8,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "README.md",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 229,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/MarkdownEditing/Markdown.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 9,
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "client/jade/member-dashboard.ng.jade",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3872,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Jade/Syntaxes/Jade.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 360.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "client/controllers/member-dashboard.coffee",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3372,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Better CoffeeScript/CoffeeScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 540.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 8,
+					"file": "lib/RequestUtils.coffee",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2532,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2068,
+								2068
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Better CoffeeScript/CoffeeScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": -0.0,
+						"translation.y": 600.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 9,
+					"file": "client/jade/index.jade",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1089,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
 							]
 						],
 						"settings":
@@ -1180,25 +1124,81 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-<<<<<<< HEAD
-					"stack_index": 6,
+					"stack_index": 11,
 					"type": "text"
 				},
 				{
-					"buffer": 8,
-					"file": "client/jade/eine.ng.jade",
+					"buffer": 10,
+					"file": "server/server.coffee",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 5132,
+						"buffer_size": 688,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								115,
-								281
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Better CoffeeScript/CoffeeScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 13,
+					"type": "text"
+				},
+				{
+					"buffer": 11,
+					"file": "lib/config.coffee",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 684,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								657,
+								657
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Better CoffeeScript/CoffeeScript.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 12,
+					"type": "text"
+				},
+				{
+					"buffer": 12,
+					"file": "client/jade/teams-config.ng.jade",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1736,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								819,
+								830
 							]
 						],
 						"settings":
@@ -1214,12 +1214,12 @@
 					"type": "text"
 				},
 				{
-					"buffer": 9,
-					"file": "lib/config.coffee",
+					"buffer": 13,
+					"file": "client/styles/main.styl",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 547,
+						"buffer_size": 1294,
 						"regions":
 						{
 						},
@@ -1232,17 +1232,13 @@
 						],
 						"settings":
 						{
-							"syntax": "Packages/Better CoffeeScript/CoffeeScript.tmLanguage",
-							"translate_tabs_to_spaces": false
+							"syntax": "Packages/Stylus/Stylus.tmLanguage"
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 9,
-=======
-					"stack_index": 1,
->>>>>>> origin/master
+					"stack_index": 10,
 					"type": "text"
 				}
 			]
@@ -1250,7 +1246,7 @@
 	],
 	"incremental_find":
 	{
-		"height": 35.0
+		"height": 29.0
 	},
 	"input":
 	{
@@ -1291,7 +1287,7 @@
 	"project": "ivo.sublime-project",
 	"replace":
 	{
-		"height": 50.0
+		"height": 54.0
 	},
 	"save_all_on_build": true,
 	"select_file":
@@ -1301,8 +1297,46 @@
 		"selected_items":
 		[
 			[
-<<<<<<< HEAD
-=======
+				"requ",
+				"lib\\RequestUtils.coffee"
+			],
+			[
+				"mem",
+				"client\\controllers\\member-dashboard.coffee"
+			],
+			[
+				"team-co",
+				"client\\jade\\teams-config.ng.jade"
+			],
+			[
+				"team",
+				"client\\controllers\\teams-config.coffee"
+			],
+			[
+				"rea",
+				"README.md"
+			],
+			[
+				"main",
+				"client\\styles\\main.styl"
+			],
+			[
+				"inde",
+				"client\\jade\\index.jade"
+			],
+			[
+				"tema",
+				"client\\jade\\team-lead.ng.jade"
+			],
+			[
+				"server",
+				"server\\server.coffee"
+			],
+			[
+				"conf",
+				"lib\\config.coffee"
+			],
+			[
 				"te",
 				"client\\jade\\teams-config.ng.jade"
 			],
@@ -1315,65 +1349,16 @@
 				"client/jade/tags.ng.jade"
 			],
 			[
->>>>>>> origin/master
 				"ind",
 				"client/jade/index.jade"
 			],
 			[
-				"clie",
-				"client/client.coffee"
-			],
-			[
-				"gb2",
-				"server/gb20.json"
-			],
-			[
-				"main",
-				"client/styles/main.styl"
-			],
-			[
-				"serv",
-				"server/server.coffee"
-			],
-			[
-				"mem",
-				"client/jade/member-dashboard.ng.jade"
-			],
-			[
-				"te",
-				"client/jade/teams-config.ng.jade"
-			],
-			[
-				"cli",
-				"client/client.coffee"
-			],
-			[
-				"conf",
-				"lib/config.coffee"
-			],
-			[
-				"ser",
-				"server/server.coffee"
-			],
-			[
-				"tags",
-				"client/jade/tags.ng.jade"
+				"read",
+				"README.md"
 			],
 			[
 				"ein",
 				"client/jade/eine.ng.jade"
-			],
-			[
-				"con",
-				"lib/config.coffee"
-			],
-			[
-				"tag",
-				"client/jade/tags.ng.jade"
-			],
-			[
-				"read",
-				"README.md"
 			],
 			[
 				"re",
@@ -1398,6 +1383,14 @@
 			[
 				"lo",
 				"client/jade/login.ng.jade"
+			],
+			[
+				"serv",
+				"server/server.coffee"
+			],
+			[
+				"ser",
+				"server/server.coffee"
 			],
 			[
 				"fami",
@@ -1462,10 +1455,6 @@
 			[
 				"rou",
 				"server/routes.coffee"
-			],
-			[
-				"inde",
-				"client/views/index.jade"
 			],
 			[
 				"bow",
