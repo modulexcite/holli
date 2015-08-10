@@ -16,7 +16,7 @@
 					form.new-team
 						.form-group
 							label(for='name') Name 
-							input#name.form-control(type='text', placeholder='Name', ng-model="newteamname") 
+							input#newteamname.form-control(type='text', placeholder='Name', ng-model="newteamname") 
 							p.help-block(ng-if="teamNameNotUnique") Team with this name already exists
 						.form-group
 							label(for='lead') Lead 
@@ -35,7 +35,7 @@
 							button.btn.btn-danger.btn-xs.pull-right(ng-click="removeMember(member)")
 								i.fa.fa-lg.fa-trash-o
 					.col-md-10
-						input.form-control(type="text", ng-model="newMember", typeahead="member as member.name for member in employees | filter:$viewValue | limitTo:10", placeholder="New team member...")
+						input#newmembername.form-control(type="text", ng-model="newMember", typeahead="member as member.name for member in employees | filter:$viewValue | limitTo:10", placeholder="New team member...")
 					.col-md-2
 						button.btn.btn-primary.btn-sm.form-control(ng-click="addMember(newMember)")
 							span.glyphicon.glyphicon-plus
