@@ -1,5 +1,5 @@
-# ivo
-vacation organizer
+# holli
+get a holiday without all the email hassle
 
 # todo
 
@@ -8,4 +8,4 @@ vacation organizer
 - count only workdays (mo-fr minus **feiertage**)
 - add absence (no request cycle)
 - complete calendar over all teams with search for people
-- better display of requests in calendar => use gantt
+- team lead can add important times (like blockzones)
