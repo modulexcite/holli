@@ -30,7 +30,7 @@
 				.panel-heading Members
 				.panel-body
 					ul.list-group
-						li.list-group-item(ng-repeat="member in currentTeam.members")
+						li.list-group-item(ng-repeat="member in currentTeam.members | orderBy:'name'")
 							span {{member.name}}
 							button.btn.btn-danger.btn-xs.pull-right(ng-click="removeMember(member)")
 								i.fa.fa-lg.fa-trash-o

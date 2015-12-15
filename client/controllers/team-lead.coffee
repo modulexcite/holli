@@ -1,6 +1,6 @@
 _ = lodash
 
-angular.module('app').controller 'teamLeadCtrl', ['$scope', '$meteor', '$window', 'uiCalendarConfig', '$timeout', ($scope, $meteor, $window, uiCalendarConfig, $timeout) ->
+angular.module('app').controller 'teamLeadCtrl', ['$scope', '$rootScope', '$meteor', '$window', 'uiCalendarConfig', '$timeout', ($scope, $rootScope, $meteor, $window, uiCalendarConfig, $timeout) ->
 	updateEvents = () ->
 		console.log "updateEvents"
 		$scope.pendingRequests = []
@@ -26,7 +26,7 @@ angular.module('app').controller 'teamLeadCtrl', ['$scope', '$meteor', '$window'
 				if $scope.RequestUtils.isPending(r._id, r.teamsOfLead) and not $scope.RequestUtils.isDenied(r._id, memberTeams)
 					$scope.pendingRequests.push r
 					console.log "add #{r.name} to PENDING (lead teams)"
-				
+
 				# but show event in calendar, if pending in any team
 				if $scope.RequestUtils.isPending(r._id, memberTeams)
 					pendingEvents.events.push event
@@ -43,17 +43,17 @@ angular.module('app').controller 'teamLeadCtrl', ['$scope', '$meteor', '$window'
 	$scope.acceptRequest = (request) ->
 		$scope.RequestUtils.accept request._id, request.teamsOfLead
 		updateEvents()
-	
+
 	$scope.denyRequest = (request) ->
 		reason = $window.prompt "Why is this denied?"
 		$scope.RequestUtils.deny request._id, request.teamsOfLead, reason
 		updateEvents()
 
-	pendingEvents = 
+	pendingEvents =
 		textColor: '#000'
 		color: '#efefef'
 		events: []
-	acceptedEvents = 
+	acceptedEvents =
 		textColor: '#000'
 		color: '#B8E297'
 		events: []
@@ -70,11 +70,10 @@ angular.module('app').controller 'teamLeadCtrl', ['$scope', '$meteor', '$window'
 
 	$scope.TeamUtils = new share.TeamUtils($meteor)
 	$scope.RequestUtils = new share.RequestUtils($meteor)
-	if Meteor.user().username == 'olaf'
-		$scope.member = share.Employees.findOne {name: "Olaf von Dühren"}
-	else
-		$scope.member = share.Employees.findOne {name: "Rafael Velásquez"}
-	console.log "member (lead): #{$scope.member.name}"
+	$scope.member = share.Employees.findOne {user: $rootScope.currentUser.username}
+	console.log "member (lead): #{$rootScope.currentUser.username}"
+	console.log $scope.member
+	console.log $rootScope.currentUser
 	$scope.leadId = $scope.member._id
 
 	$scope.myTeams = $scope.TeamUtils.leadTeams $scope.leadId

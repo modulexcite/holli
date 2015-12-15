@@ -1,438 +1,434 @@
 [
-	{
-		"Name" : "Alex van Winckel",
-		"GB" : "2"
-	},
-	{
-		"Name" : "Alexander Lukas",
-		"GB" : "2"
-	},
-	{
-		"Name" : "Ali Atwi",
-		"GB" : "2"
-	},
-	{
-		"Name" : "Andreas Otten",
-		"GB" : "2"
-	},
-	{
-		"Name" : "Anke Lewien",
-		"GB" : "2"
-	},
-	{
-		"Name" : "Annelie Schumacher",
-		"GB" : "2"
-	},
-	{
-		"Name" : "Annika Rath",
-		"GB" : "1234568"
-	},
-	{
-		"Name" : "Axel Bicker",
-		"GB" : "2"
-	},
-	{
-		"Name" : "Bastian Klinkenberg",
-		"GB" : "2"
-	},
-	{
-		"Name" : "Benedikt Engels",
-		"GB" : "2"
-	},
-	{
-		"Name" : "Bernhard Meinecke",
-		"GB" : "2"
-	},
-	{
-		"Name" : "Bernhard Meinecke",
-		"GB" : "2"
-	},
-	{
-		"Name" : "Bo-Min Kang",
-		"GB" : "2"
-	},
-	{
-		"Name" : "Carolin Kluge",
-		"GB" : "2"
-	},
-	{
-		"Name" : "Christian Friedel",
-		"GB" : "2"
-	},
-	{
-		"Name" : "Christoph Küpper",
-		"GB" : "2"
-	},
-	{
-		"Name" : "Christophe Denis",
-		"GB" : "2"
-	},
-	{
-		"Name" : "Claudia Oßmann",
-		"GB" : "2"
-	},
-	{
-		"Name" : "David Rovinsky",
-		"GB" : "2"
-	},
-	{
-		"Name" : "Debora Creusen",
-		"GB" : "26"
-	},
-	{
-		"Name" : "Dietlinde Giboni",
-		"GB" : "28"
-	},
-	{
-		"Name" : "Dindar Erenoglu",
-		"GB" : "2"
-	},
-	{
-		"Name" : "Dirk Bonné",
-		"GB" : "2"
-	},
-	{
-		"Name" : "Dirk Ossenberg-Engels",
-		"GB" : "2"
-	},
-	{
-		"Name" : "Dirk Schlemper",
-		"GB" : "2"
-	},
-	{
-		"Name" : "Dirk Sorges",
-		"GB" : "2"
-	},
-	{
-		"Name" : "Dominik Puhl",
-		"GB" : "2"
-	},
-	{
-		"Name" : "Dr. Christoph Seifert",
-		"GB" : "2"
-	},
-	{
-		"Name" : "Dr. Stefan Droste",
-		"GB" : "28"
-	},
-	{
-		"Name" : "Ekrem Tastan",
-		"GB" : "2"
-	},
-	{
-		"Name" : "Enrico Panascia",
-		"GB" : "2"
-	},
-	{
-		"Name" : "Eva Savelsberg",
-		"GB" : "2"
-	},
-	{
-		"Name" : "Florent Bernard",
-		"GB" : "2"
-	},
-	{
-		"Name" : "Florent Bernard",
-		"GB" : "2"
-	},
-	{
-		"Name" : "Florian Falter",
-		"GB" : "2"
-	},
-	{
-		"Name" : "Florian Hermey",
-		"GB" : "2"
-	},
-	{
-		"Name" : "Florian Schaar",
-		"GB" : "2"
-	},
-	{
-		"Name" : "Frank Fleischhack",
-		"GB" : "2"
-	},
-	{
-		"Name" : "Frank Schneider",
-		"GB" : "2"
-	},
-	{
-		"Name" : "Frank Winsemann",
-		"GB" : "2"
-	},
-	{
-		"Name" : "Guy Heugna",
-		"GB" : "2"
-	},
-	{
-		"Name" : "Hechard Services Ltd. Richard Williams",
-		"GB" : "2"
-	},
-	{
-		"Name" : "Hein Lentjes",
-		"GB" : "2"
-	},
-	{
-		"Name" : "Henrik Olberding",
-		"GB" : "2"
-	},
-	{
-		"Name" : "Ingo Marko",
-		"GB" : "2"
-	},
-	{
-		"Name" : "Isabelle Förster",
-		"GB" : "2"
-	},
-	{
-		"Name" : "Jan Karger",
-		"GB" : "23"
-	},
-	{
-		"Name" : "Jean-Marie Bücken",
-		"GB" : "2"
-	},
-	{
-		"Name" : "Jennifer Stead",
-		"GB" : "2"
-	},
-	{
-		"Name" : "Jens Bethkowsky",
-		"GB" : "2"
-	},
-	{
-		"Name" : "Julia Lenzen",
-		"GB" : "2"
-	},
-	{
-		"Name" : "Julia Paul",
-		"GB" : "2"
-	},
-	{
-		"Name" : "Julia Weynands",
-		"GB" : "2"
-	},
-	{
-		"Name" : "Julien Drevon, Frankreich",
-		"GB" : "2"
-	},
-	{
-		"Name" : "Jörg Toborg",
-		"GB" : "2"
-	},
-	{
-		"Name" : "Kai Schmitz",
-		"GB" : "2"
-	},
-	{
-		"Name" : "Karin Muller",
-		"GB" : "2"
-	},
-	{
-		"Name" : "Karsten Horn",
-		"GB" : "12"
-	},
-	{
-		"Name" : "Karsten Schumacher",
-		"GB" : "2"
-	},
-	{
-		"Name" : "Katja Krämer",
-		"GB" : "2"
-	},
-	{
-		"Name" : "Kirstin Podeschwik",
-		"GB" : "2"
-	},
-	{
-		"Name" : "Lukas Oßmann",
-		"GB" : "2"
-	},
-	{
-		"Name" : "Lutz Felsberg",
-		"GB" : "2"
-	},
-	{
-		"Name" : "Marcus Heinen",
-		"GB" : "2"
-	},
-	{
-		"Name" : "Martin Noy",
-		"GB" : "2"
-	},
-	{
-		"Name" : "Matthias Steinert",
-		"GB" : "2"
-	},
-	{
-		"Name" : "Maxime Laschet",
-		"GB" : "2"
-	},
-	{
-		"Name" : "Maximilian Florkowski",
-		"GB" : "2"
-	},
-	{
-		"Name" : "Mehdi Kraiem",
-		"GB" : "2"
-	},
-	{
-		"Name" : "Michael Ludwig",
-		"GB" : "2"
-	},
-	{
-		"Name" : "Nathalie Draht, geb. Heuer",
-		"GB" : "2"
-	},
-	{
-		"Name" : "Olaf von Dühren",
-		"GB" : "2"
-	},
-	{
-		"Name" : "Olga Frenkel",
-		"GB" : "2"
-	},
-	{
-		"Name" : "Paul Flachskampf",
-		"GB" : "2"
-	},
-	{
-		"Name" : "Paul Mangartz",
-		"GB" : "2"
-	},
-	{
-		"Name" : "Peng Deng, China",
-		"GB" : "2"
-	},
-	{
-		"Name" : "Peter Eisenlohr",
-		"GB" : "2"
-	},
-	{
-		"Name" : "Peter Schaefer",
-		"GB" : "2"
-	},
-	{
-		"Name" : "Philipp Caratiola",
-		"GB" : "2"
-	},
-	{
-		"Name" : "Rafael Michalski",
-		"GB" : "2"
-	},
-	{
-		"Name" : "Rafael Velásquez",
-		"GB" : "2"
-	},
-	{
-		"Name" : "Rausch Systems GmbH, Klemens Rausch",
-		"GB" : "2"
-	},
-	{
-		"Name" : "Sabine Lüttgen",
-		"GB" : "2"
-	},
-	{
-		"Name" : "Sebastian Brand",
-		"GB" : "28"
-	},
-	{
-		"Name" : "Sebastian Krämer",
-		"GB" : "2"
-	},
-	{
-		"Name" : "Silke Junge",
-		"GB" : "2"
-	},
-	{
-		"Name" : "Simon Draht",
-		"GB" : "2"
-	},
-	{
-		"Name" : "Simone Recker",
-		"GB" : "26"
-	},
-	{
-		"Name" : "Sonja Bausch",
-		"GB" : "2"
-	},
-	{
-		"Name" : "SRH Consulting, Stig Reenberg Hansen ",
-		"GB" : "2"
-	},
-	{
-		"Name" : "Stefan Rupp",
-		"GB" : "2"
-	},
-	{
-		"Name" : "Stephan Meyer",
-		"GB" : "2"
-	},
-	{
-		"Name" : "Stephan Peters",
-		"GB" : "2"
-	},
-	{
-		"Name" : "Test",
-		"GB" : "2"
-	},
-	{
-		"Name" : "Thomas Bergmans",
-		"GB" : "2"
-	},
-	{
-		"Name" : "Thomas Gorgels",
-		"GB" : "2"
-	},
-	{
-		"Name" : "Thorsten Becker",
-		"GB" : "2"
-	},
-	{
-		"Name" : "Tobias Ernst",
-		"GB" : "2"
-	},
-	{
-		"Name" : "Tobias Jansen",
-		"GB" : "2"
-	},
-	{
-		"Name" : "Tobias Vaegs",
-		"GB" : "2"
-	},
-	{
-		"Name" : "Torsten Bolz",
-		"GB" : "2"
-	},
-	{
-		"Name" : "Ulrich Dorndorf",
-		"GB" : "28"
-	},
-	{
-		"Name" : "Ute Schiller",
-		"GB" : "2"
-	},
-	{
-		"Name" : "Verónica de Diego Coppen",
-		"GB" : "2"
-	},
-	{
-		"Name" : "Werner Schmitz",
-		"GB" : "2"
-	},
-	{
-		"Name" : "Wolfgang Schommertz",
-		"GB" : "2"
-	},
-	{
-		"Name" : "Yan Chen",
-		"GB" : "2"
-	},
-	{
-		"Name" : "Yoon-Soo Hwang",
-		"GB" : "2"
-	},
-	{
-		"Name" : "Zeynep Yavas",
-		"GB" : "2"
-	}
+  {
+    "name": "Ali Atwi",
+    "user": "Ali.Atwi"
+  },
+  {
+    "name": "Sonja Bausch",
+    "user": "Sonja.Bausch"
+  },
+  {
+    "name": "Thorsten Becker",
+    "user": "Thorsten.Becker"
+  },
+  {
+    "name": "Thomas Bergmans",
+    "user": "Thomas.Bergmans"
+  },
+  {
+    "name": "Florent Bernard",
+    "user": "Florent.Bernard"
+  },
+  {
+    "name": "Jens Bethkowsky",
+    "user": "Jens.Bethkowsky"
+  },
+  {
+    "name": "Axel Bicker",
+    "user": "Axel.Bicker"
+  },
+  {
+    "name": "Matthias Bildhauer",
+    "user": "Matthias.Bildhauer"
+  },
+  {
+    "name": "Torsten Bolz",
+    "user": "Torsten.Bolz"
+  },
+  {
+    "name": "Dirk Bonne",
+    "user": "Dirk.Bonne"
+  },
+  {
+    "name": "Marius Bronner",
+    "user": "Marius.Bronner"
+  },
+  {
+    "name": "Philipp Caratiola",
+    "user": "Philipp.Caratiola"
+  },
+  {
+    "name": "Nadja Carstensen",
+    "user": "Nadja.Carstensen"
+  },
+  {
+    "name": "Yan Chen",
+    "user": "Yan.Chen"
+  },
+  {
+    "name": "Debora Creusen",
+    "user": "Debora.Creusen"
+  },
+  {
+    "name": "Niklas Dahl",
+    "user": "Niklas.Dahl"
+  },
+  {
+    "name": "Veronica de Diego Coppen",
+    "user": "Veronica.deDiegoCoppen"
+  },
+  {
+    "name": "Peng Deng",
+    "user": "Peng.Deng"
+  },
+  {
+    "name": "Christophe Denis",
+    "user": "Christophe.Denis"
+  },
+  {
+    "name": "Ulrich Dorndorf",
+    "user": "Ulrich.Dorndorf"
+  },
+  {
+    "name": "Nathalie Draht",
+    "user": "Nathalie.Draht"
+  },
+  {
+    "name": "Simon Draht",
+    "user": "Simon.Draht"
+  },
+  {
+    "name": "Timo Duernholz",
+    "user": "Timo.Duernholz"
+  },
+  {
+    "name": "Peter Eisenlohr",
+    "user": "Peter.Eisenlohr"
+  },
+  {
+    "name": "Benedikt Engels",
+    "user": "Benedikt.Engels"
+  },
+  {
+    "name": "Dindar Erenoglu",
+    "user": "Dindar.Erenoglu"
+  },
+  {
+    "name": "Tobias Ernst",
+    "user": "Tobias.Ernst"
+  },
+  {
+    "name": "Florian Falter",
+    "user": "Florian.Falter"
+  },
+  {
+    "name": "Lutz Felsberg",
+    "user": "Lutz.Felsberg"
+  },
+  {
+    "name": "Paul Flachskampf",
+    "user": "Paul.Flachskampf"
+  },
+  {
+    "name": "Frank Fleischhack",
+    "user": "Frank.Fleischhack"
+  },
+  {
+    "name": "Maximilian Florkowski",
+    "user": "Maximilian.Florkowski"
+  },
+  {
+    "name": "Isabelle Foerster",
+    "user": "Isabelle.Foerster"
+  },
+  {
+    "name": "Olga Frenkel",
+    "user": "Olga.Frenkel"
+  },
+  {
+    "name": "Christian Friedel",
+    "user": "Christian.Friedel"
+  },
+  {
+    "name": "Dietlinde Giboni",
+    "user": "Dietlinde.Giboni"
+  },
+  {
+    "name": "Thomas Gorgels",
+    "user": "Thomas.Gorgels"
+  },
+  {
+    "name": "Marcus Heinen",
+    "user": "Marcus.Heinen"
+  },
+  {
+    "name": "Florian Hermey",
+    "user": "Florian.Hermey"
+  },
+  {
+    "name": "Yannik Hermey",
+    "user": "Yannik.Hermey"
+  },
+  {
+    "name": "Guy Paulin Heugna",
+    "user": "GuyPaulin.Heugna"
+  },
+  {
+    "name": "Karsten Horn",
+    "user": "Karsten.Horn"
+  },
+  {
+    "name": "Yoonsoo Hwang",
+    "user": "Yoonsoo.Hwang"
+  },
+  {
+    "name": "Tobias Jansen",
+    "user": "Tobias.Jansen"
+  },
+  {
+    "name": "Stefan Jollet",
+    "user": "Stefan.Jollet"
+  },
+  {
+    "name": "Silke Junge",
+    "user": "Silke.Junge"
+  },
+  {
+    "name": "Erik Juretzek",
+    "user": "Erik.Juretzek"
+  },
+  {
+    "name": "Bo-Min Kang",
+    "user": "Bo-Min.Kang"
+  },
+  {
+    "name": "Bastian Klinkenberg",
+    "user": "Bastian.Klinkenberg"
+  },
+  {
+    "name": "Carolin Kluge",
+    "user": "Carolin.Kluge"
+  },
+  {
+    "name": "Gerald Kolter",
+    "user": "Gerald.Kolter"
+  },
+  {
+    "name": "Katja Krämer",
+    "user": "Katja.Kraemer"
+  },
+  {
+    "name": "Sebastian Krämer",
+    "user": "Sebastian.Kraemer"
+  },
+  {
+    "name": "Mehdi Kraiem",
+    "user": "Mehdi.Kraiem"
+  },
+  {
+    "name": "Christoph Kuepper",
+    "user": "Christoph.Kuepper"
+  },
+  {
+    "name": "Elina-Larissa Kusch",
+    "user": "Elina-Larissa.Kusch"
+  },
+  {
+    "name": "Hein Lentjes",
+    "user": "Hein.Lentjes"
+  },
+  {
+    "name": "Anke Lewien",
+    "user": "Anke.Lewien"
+  },
+  {
+    "name": "Michael Ludwig",
+    "user": "Michael.Ludwig"
+  },
+  {
+    "name": "Alexander Lukas",
+    "user": "Alexander.Lukas"
+  },
+  {
+    "name": "Paul Mangartz",
+    "user": "Paul.Mangartz"
+  },
+  {
+    "name": "Ingo Marko",
+    "user": "Ingo.Marko"
+  },
+  {
+    "name": "Bernhard Meinecke",
+    "user": "Bernhard.Meinecke"
+  },
+  {
+    "name": "Stephan Meyer",
+    "user": "Stephan.Meyer"
+  },
+  {
+    "name": "Rafael Michalski",
+    "user": "Rafael.Michalski"
+  },
+  {
+    "name": "Karin Muller",
+    "user": "Karin.Muller"
+  },
+  {
+    "name": "Martin Noy",
+    "user": "Martin.Noy"
+  },
+  {
+    "name": "Henrik Olberding",
+    "user": "Henrik.Olberding"
+  },
+  {
+    "name": "Dirk Ossenberg-Engels",
+    "user": "dirk.ossenberg"
+  },
+  {
+    "name": "Claudia Ossmann",
+    "user": "Claudia.Ossmann"
+  },
+  {
+    "name": "Andreas Otten",
+    "user": "Andreas.Otten"
+  },
+  {
+    "name": "Enrico Panascia",
+    "user": "Enrico.Panascia"
+  },
+  {
+    "name": "Julia Paul",
+    "user": "Julia.Paul"
+  },
+  {
+    "name": "Stephan Peters",
+    "user": "Stephan.Peters"
+  },
+  {
+    "name": "Filip Petri",
+    "user": "Filip.Petri"
+  },
+  {
+    "name": "Kirstin Podeschwik",
+    "user": "Kirstin.Podeschwik"
+  },
+  {
+    "name": "Dominik Puhl",
+    "user": "Dominik.Puhl"
+  },
+  {
+    "name": "Klemens Rausch",
+    "user": "Klemens.Rausch"
+  },
+  {
+    "name": "Simone Recker",
+    "user": "Simone.Recker"
+  },
+  {
+    "name": "Stig Reenberg-Hansen",
+    "user": "Stig.Reenberg-Hansen"
+  },
+  {
+    "name": "Daniel Rose",
+    "user": "Daniel.Rose"
+  },
+  {
+    "name": "David Rovinsky",
+    "user": "David.Rovinsky"
+  },
+  {
+    "name": "Stefan Rupp",
+    "user": "Stefan.Rupp"
+  },
+  {
+    "name": "Eva Savelsberg",
+    "user": "Eva.Savelsberg"
+  },
+  {
+    "name": "Florian Schaar",
+    "user": "Florian.Schaar"
+  },
+  {
+    "name": "Peter Schaefer",
+    "user": "Peter.Schaefer"
+  },
+  {
+    "name": "Ute Schiller",
+    "user": "Ute.Schiller"
+  },
+  {
+    "name": "Dirk Schlemper",
+    "user": "Dirk.Schlemper"
+  },
+  {
+    "name": "Kai Schmitz",
+    "user": "Kai.Schmitz"
+  },
+  {
+    "name": "Werner Schmitz",
+    "user": "Werner.Schmitz"
+  },
+  {
+    "name": "Frank Schneider",
+    "user": "Frank.Schneider"
+  },
+  {
+    "name": "Wolfgang Schommertz",
+    "user": "Wolfgang.Schommertz"
+  },
+  {
+    "name": "Annelie Schumacher",
+    "user": "Annelie.Schumacher"
+  },
+  {
+    "name": "Karsten Schumacher",
+    "user": "Karsten.Schumacher"
+  },
+  {
+    "name": "Christoph Seifert",
+    "user": "Christoph.Seifert"
+  },
+  {
+    "name": "Markus Sekula",
+    "user": "Markus.Sekula"
+  },
+  {
+    "name": "Dirk Sorges",
+    "user": "Dirk.Sorges"
+  },
+  {
+    "name": "Jennifer Stead",
+    "user": "Jennifer.Stead"
+  },
+  {
+    "name": "Ekrem Tastan",
+    "user": "Ekrem.Tastan"
+  },
+  {
+    "name": "Joerg Toborg",
+    "user": "Joerg.Toborg"
+  },
+  {
+    "name": "Tobias Vaegs",
+    "user": "Tobias.Vaegs"
+  },
+  {
+    "name": "Arnaud van Loo",
+    "user": "Arnaud.vanLoo"
+  },
+  {
+    "name": "Alex van Winckel",
+    "user": "Alex.vanWinckel"
+  },
+  {
+    "name": "Rafael Velasquez",
+    "user": "Rafael.Velasquez"
+  },
+  {
+    "name": "Olaf von Duehren",
+    "user": "Olaf.vonDuehren"
+  },
+  {
+    "name": "Julia Weynands",
+    "user": "Julia.Weynands"
+  },
+  {
+    "name": "Richard Williams",
+    "user": "Richard.Williams"
+  },
+  {
+    "name": "Frank Winsemann",
+    "user": "Frank.Winsemann"
+  }
 ]

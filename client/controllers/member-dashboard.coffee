@@ -1,6 +1,6 @@
 _ = lodash
 
-angular.module('app').controller 'memberDashboardCtrl', ['$scope', '$meteor', '$window', ($scope, $meteor, $window) ->
+angular.module('app').controller 'memberDashboardCtrl', ['$scope', '$rootScope', '$meteor', '$window', ($scope, $rootScope, $meteor, $window) ->
 	$scope.hoveringOver = (value) ->
 		$scope.overStar = value
 
@@ -30,7 +30,7 @@ angular.module('app').controller 'memberDashboardCtrl', ['$scope', '$meteor', '$
 			#$scope.vacationTo = null
 			$scope.prio = null
 			updateEvents()
-		
+
 	updateEvents = () ->
 		# empty arrays, without setting new reference
 		pendingEvents.events.splice(0, pendingEvents.events.length)
@@ -43,7 +43,7 @@ angular.module('app').controller 'memberDashboardCtrl', ['$scope', '$meteor', '$
 			r.member = share.Employees.findOne(r.memberRef)
 			r.memberTeams = $scope.TeamUtils.memberTeams r.member._id
 			if r.from
-				event = 
+				event =
 					id: r._id
 					title: "#{r.name} (#{r.member.name})"
 					start: r.from
@@ -59,19 +59,21 @@ angular.module('app').controller 'memberDashboardCtrl', ['$scope', '$meteor', '$
 					acceptedEvents.events.push event
 					$scope.acceptedRequests.push r
 					console.log "add #{r.name} to ACCEPTED"
-				
+
 				else
 					pendingEvents.events.push event
 					$scope.pendingRequests.push r
 					console.log "add #{r.name} to PENDING"
-					
+
 
 	# ---------------------------------------------------------------------------------
 	$scope.TeamUtils = new share.TeamUtils($meteor)
 	$scope.RequestUtils = new share.RequestUtils($meteor)
 
-	$scope.member = share.Employees.findOne {name: "Sebastian Krämer"}
-	console.log "member: #{$scope.member}"
+	$scope.member = share.Employees.findOne {user: $rootScope.currentUser.username}
+	console.log "member: #{$rootScope.currentUser.username}"
+	console.log $rootScope.currentUser
+	console.log $scope.member
 	$scope.teams =  $scope.$meteorCollection () -> share.Teams.find {members: { $elemMatch: {_id: $scope.member._id}}}
 	$scope.requests =  $scope.$meteorCollection () -> share.Requests.find {memberRef: $scope.member._id, to: {$gt: new Date()} }
 	allRequests = $scope.$meteorCollection(share.Requests)
@@ -84,11 +86,11 @@ angular.module('app').controller 'memberDashboardCtrl', ['$scope', '$meteor', '$
 	$scope.dateOptions =
 		formatYear: 'yy'
 		startingDay: 1
-	pendingEvents = 
+	pendingEvents =
 		textColor: '#000'
 		color: '#efefef'
 		events: []
-	acceptedEvents = 
+	acceptedEvents =
 		textColor: '#000'
 		color: '#B8E297'
 		events: []

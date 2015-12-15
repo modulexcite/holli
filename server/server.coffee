@@ -10,6 +10,11 @@ Meteor.startup () ->
 		Accounts.createUser
 			username: "rafi"
 			password: "rafi"
+	stdUser = Meteor.users.findOne({username: "eva"})
+	if !stdUser
+		Accounts.createUser
+			username: "eva"
+			password: "eva"
 
 	# not used, was for init...
 	if share.Employees.find().count() == 0
@@ -20,8 +25,14 @@ Meteor.startup () ->
 		data_raw = fs.readFileSync file, 'utf8'
 		data = JSON.parse data_raw
 		for e in data
-			share.Employees.insert 
-				name: e.Name
+			username = e['user'].toLowerCase()
+			share.Employees.insert
+				name: e['name']
+				user: username
 				gb: 20
 				active: true
 				vacations: []
+			Accounts.createUser
+				username: username
+				password: e['user'].toLowerCase()
+				email: "#{e['user']}@inform-software.com"

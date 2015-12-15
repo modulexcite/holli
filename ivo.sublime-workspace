@@ -371,15 +371,7 @@
 			"file": "/D/sync/TraPac/MSC/cranewait.msc",
 			"settings":
 			{
-				"buffer_size": 2543,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "/C/tmp/testmap.coffee",
-			"settings":
-			{
-				"buffer_size": 244,
+				"buffer_size": 2428,
 				"line_ending": "Windows"
 			}
 		},
@@ -387,8 +379,24 @@
 			"file": "README.md",
 			"settings":
 			{
-				"buffer_size": 229,
+				"buffer_size": 312,
 				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/D/projects/APMT/logs/APM-2/statusreport.log",
+			"settings":
+			{
+				"buffer_size": 1987,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/D/projects/APMT/logs/APM-2/dataadapter/error.log",
+			"settings":
+			{
+				"buffer_size": 8257,
+				"line_ending": "Unix"
 			}
 		},
 		{
@@ -419,7 +427,7 @@
 			"file": "client/jade/index.jade",
 			"settings":
 			{
-				"buffer_size": 1089,
+				"buffer_size": 1123,
 				"line_ending": "Windows"
 			}
 		},
@@ -538,12 +546,12 @@
 	},
 	"expanded_folders":
 	[
-		"/D/sync/_private/devel/ivo",
-		"/D/sync/_private/devel/ivo/client",
-		"/D/sync/_private/devel/ivo/client/lib"
+		"/D/sync/_private/devel/holli"
 	],
 	"file_history":
 	[
+		"/D/projects/APMT/logs/APM-2/dataadapter/command.log",
+		"/C/tmp/testmap.coffee",
 		"/D/projects/syncrotess/web/hub-webdepot/trunk/server/config/config.global.coffee",
 		"/D/sync/_private/devel/ivo/client/client.coffee",
 		"/D/projects/CTB/vc/TwinVC-trunk/Client/VCClient/bin/Debug/Log/VCClient_FN199_20150717.log.0",
@@ -669,9 +677,7 @@
 		"/Users/basti/Development/web/mo-edit/server/test.html",
 		"/Users/basti/Development/web/mo-edit/node_modules/connect-assets/node_modules/uglify-js/lib/mozilla-ast.js",
 		"/Users/basti/Library/Application Support/Sublime Text 3/Packages/User/Preferences.sublime-settings",
-		"/Users/basti/Development/web/mo-edit/client/public/bower/jquery-ui/ui/effect-drop.js",
-		"/Users/basti/Development/web/mo-edit/server/controllers/documents/index.coffee",
-		"/Users/basti/Development/web/mo-edit/node_modules/mongoose/node_modules/mpromise/test/promises.Aplus.js"
+		"/Users/basti/Development/web/mo-edit/client/public/bower/jquery-ui/ui/effect-drop.js"
 	],
 	"find":
 	{
@@ -834,7 +840,7 @@
 	"groups":
 	[
 		{
-			"selected": 8,
+			"selected": 6,
 			"sheets":
 			[
 				{
@@ -863,7 +869,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 6,
+					"stack_index": 10,
 					"type": "text"
 				},
 				{
@@ -894,7 +900,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 5,
+					"stack_index": 9,
 					"type": "text"
 				},
 				{
@@ -923,7 +929,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 3,
+					"stack_index": 7,
 					"type": "text"
 				},
 				{
@@ -932,64 +938,7 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 2543,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1508,
-								1508
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/User/msc.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": -0.0,
-						"translation.y": 300.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 7,
-					"type": "text"
-				},
-				{
-					"buffer": 4,
-					"file": "/C/tmp/testmap.coffee",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 244,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								244,
-								244
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Better CoffeeScript/CoffeeScript.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 8,
-					"type": "text"
-				},
-				{
-					"buffer": 5,
-					"file": "README.md",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 229,
+						"buffer_size": 2428,
 						"regions":
 						{
 						},
@@ -1002,17 +951,103 @@
 						],
 						"settings":
 						{
+							"syntax": "Packages/User/msc.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": -0.0,
+						"translation.y": 300.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 11,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "README.md",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 312,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								310,
+								310
+							]
+						],
+						"settings":
+						{
 							"syntax": "Packages/MarkdownEditing/Markdown.tmLanguage"
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 9,
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "/D/projects/APMT/logs/APM-2/statusreport.log",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1987,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
 					"type": "text"
 				},
 				{
 					"buffer": 6,
+					"file": "/D/projects/APMT/logs/APM-2/dataadapter/error.log",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 8257,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								4750,
+								4750
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 7,
 					"file": "client/jade/member-dashboard.ng.jade",
 					"semi_transient": false,
 					"settings":
@@ -1037,11 +1072,11 @@
 						"translation.y": 360.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 2,
+					"stack_index": 6,
 					"type": "text"
 				},
 				{
-					"buffer": 7,
+					"buffer": 8,
 					"file": "client/controllers/member-dashboard.coffee",
 					"semi_transient": false,
 					"settings":
@@ -1066,11 +1101,11 @@
 						"translation.y": 540.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 5,
 					"type": "text"
 				},
 				{
-					"buffer": 8,
+					"buffer": 9,
 					"file": "lib/RequestUtils.coffee",
 					"semi_transient": false,
 					"settings":
@@ -1091,28 +1126,28 @@
 							"syntax": "Packages/Better CoffeeScript/CoffeeScript.tmLanguage",
 							"translate_tabs_to_spaces": false
 						},
-						"translation.x": -0.0,
+						"translation.x": 0.0,
 						"translation.y": 600.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 4,
 					"type": "text"
 				},
 				{
-					"buffer": 9,
+					"buffer": 10,
 					"file": "client/jade/index.jade",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1089,
+						"buffer_size": 1123,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
+								540,
+								540
 							]
 						],
 						"settings":
@@ -1124,11 +1159,11 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 11,
+					"stack_index": 3,
 					"type": "text"
 				},
 				{
-					"buffer": 10,
+					"buffer": 11,
 					"file": "server/server.coffee",
 					"semi_transient": false,
 					"settings":
@@ -1153,11 +1188,11 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 13,
+					"stack_index": 14,
 					"type": "text"
 				},
 				{
-					"buffer": 11,
+					"buffer": 12,
 					"file": "lib/config.coffee",
 					"semi_transient": false,
 					"settings":
@@ -1181,11 +1216,11 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 12,
+					"stack_index": 13,
 					"type": "text"
 				},
 				{
-					"buffer": 12,
+					"buffer": 13,
 					"file": "client/jade/teams-config.ng.jade",
 					"semi_transient": false,
 					"settings":
@@ -1210,11 +1245,11 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 4,
+					"stack_index": 8,
 					"type": "text"
 				},
 				{
-					"buffer": 13,
+					"buffer": 14,
 					"file": "client/styles/main.styl",
 					"semi_transient": false,
 					"settings":
@@ -1232,13 +1267,15 @@
 						],
 						"settings":
 						{
-							"syntax": "Packages/Stylus/Stylus.tmLanguage"
+							"syntax": "Packages/Stylus/Stylus.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 10,
+					"stack_index": 12,
 					"type": "text"
 				}
 			]
@@ -1297,6 +1334,14 @@
 		"selected_items":
 		[
 			[
+				"rea",
+				"README.md"
+			],
+			[
+				"ind",
+				"client\\jade\\index.jade"
+			],
+			[
 				"requ",
 				"lib\\RequestUtils.coffee"
 			],
@@ -1311,10 +1356,6 @@
 			[
 				"team",
 				"client\\controllers\\teams-config.coffee"
-			],
-			[
-				"rea",
-				"README.md"
 			],
 			[
 				"main",
@@ -1347,10 +1388,6 @@
 			[
 				"tag",
 				"client/jade/tags.ng.jade"
-			],
-			[
-				"ind",
-				"client/jade/index.jade"
 			],
 			[
 				"read",
