@@ -16,8 +16,8 @@
 					ul.vacations.list-unstyled
 						li.vacation(ng-repeat="vacation in pendingRequests")
 							strong {{vacation.member.name}}
-							i.fa.fa-lg.fa-thumbs-o-down.pull-right(ng-click="denyRequest(vacation)")
-							i.fa.fa-lg.fa-thumbs-o-up.accept-request.pull-right(ng-click="acceptRequest(vacation)")
+							i.fa.fa-lg.fa-thumbs-down.red.pull-right(ng-click="denyRequest(vacation)", title="Deny request")
+							i.fa.fa-lg.fa-thumbs-up.green.accept-request.pull-right(ng-click="acceptRequest(vacation)", title="Accept request")
 							.vacation-name {{vacation.name}}
 							.vacation-fromto {{vacation.from | date : format}} - {{vacation.to | date : format}} ({{ requestDuration(vacation)}} days)
 							.vacation-prio 

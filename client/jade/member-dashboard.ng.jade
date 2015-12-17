@@ -5,7 +5,7 @@
 				.panel-heading My Teams
 				.panel-body
 					ul.teams.list-unstyled
-						li.myteam(ng-repeat="team in teams")
+						li.myteam(ng-repeat="team in teamsWithLead")
 							strong.team-name {{team.name}}
 								i.fa.fa-star.left-space-5(ng-if="member._id == team.lead._id", title="I am team lead here")
 							.team-lead {{team.lead.name}}
