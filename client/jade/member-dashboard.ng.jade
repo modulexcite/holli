@@ -7,6 +7,7 @@
 					ul.teams.list-unstyled
 						li.myteam(ng-repeat="team in teams")
 							strong.team-name {{team.name}}
+								i.fa.fa-star.left-space-5(ng-if="member._id == team.lead._id", title="I am team lead here")
 							.team-lead {{team.lead.name}}
 
 			.panel.panel-primary
@@ -15,7 +16,7 @@
 					ul.vacations.list-unstyled
 						li.vacation(ng-repeat="vacation in pendingRequests")
 							strong.vacation-name {{vacation.name}}
-							i.fa.fa-lg.fa-trash-o.pull-right(ng-click="deleteRequest(vacation)")
+							i.fa.fa-lg.fa-trash-o.pull-right(ng-click="deleteRequest(vacation)", title="Remove request")
 							.vacation-fromto {{vacation.from | date : format}} - {{vacation.to | date : format}}
 							.vacation-prio 
 								rating(ng-model="vacation.prio", max="maxPrio", readonly)
@@ -23,9 +24,9 @@
 								ul.members
 									li(ng-repeat="t in teams") 
 										span.text-muted {{ t.name }}
-										i.left-space-5.fa.fa-lg.fa-thumbs-o-down(ng-if="vacation.responses[t._id].state=='denied'")
-										i.left-space-5.fa.fa-lg.fa-thumbs-o-up(ng-if="vacation.responses[t._id].state=='accepted'")
-										i.left-space-5.fa.fa-lg.fa-clock-o(ng-if="!vacation.responses[t._id] || vacation.responses[t._id].state=='pending'")
+										i.left-space-5.fa.fa-lg.fa-thumbs-o-down(ng-if="vacation.responses[t._id].state=='denied'", title="Denied by team")
+										i.left-space-5.fa.fa-lg.fa-thumbs-o-up(ng-if="vacation.responses[t._id].state=='accepted'", title="Accepted by team")
+										i.left-space-5.fa.fa-lg.fa-clock-o(ng-if="!vacation.responses[t._id] || vacation.responses[t._id].state=='pending'", title="Waiting for team approval")
 
 			.panel.panel-primary
 				.panel-heading My denied requests

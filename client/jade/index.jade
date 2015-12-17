@@ -36,6 +36,10 @@ body(ng-app="app")
 						a(ui-sref='teams-config')
 							span 
 							| Team-Config
+					li(ui-sref-active="active")
+						a(ui-sref='employees')
+							span 
+							| Employees
 				ul.nav.navbar-nav.navbar-right
 					+loginButtons
 

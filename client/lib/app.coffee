@@ -7,7 +7,7 @@ _ = lodash
 app = angular.module 'app', ['angular-meteor', 'ui.router', 'ui.bootstrap', 'ui.calendar']
 
 # routes
-userResolve = 
+userResolve =
 				"currentUser": [
 					"$meteor", ($meteor) ->
 						$meteor.requireUser()
@@ -35,10 +35,15 @@ app.config ['$stateProvider', '$urlRouterProvider', '$locationProvider', ($state
 			templateUrl: 'client/jade/all-teams.html'
 			controller: 'allTeamsCtrl'
 			resolve: userResolve
+		.state 'employees',
+			url: '/employees'
+			templateUrl: 'client/jade/employees.html'
+			controller: 'employeesCtrl'
+			resolve: userResolve
 		.state 'login',
 			url: '/login'
 			templateUrl: 'client/jade/login.html'
-			
+
 	$urlRouterProvider.otherwise '/teams-config'
 	$locationProvider.html5Mode true
 ]

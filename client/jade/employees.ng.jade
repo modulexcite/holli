@@ -1,0 +1,32 @@
+.container-fluid
+.row
+	.col-md-12
+		.panel.panel-primary
+			.panel-heading
+				h3.panel-title Employees
+			.panel-body
+
+				form
+					.form-group
+						.input-group
+							.input-group-addon
+								i.glyphicon.glyphicon-search
+							input.form-control(type="text", placeholder="Search...", ng-model="search")
+
+				.table-responsive
+					table.table.table-bordered.table-striped.table-condensed
+						thead
+							tr
+								th Name
+								th Username
+								th GB
+								th Teams
+								th Teamlead
+
+						tbody
+							tr(ng-repeat="e in employees | orderBy:'name' | filter:search")
+								td {{ e.name }}
+								td {{ e.user }}
+								td {{ e.gb }}
+								td {{ teamsOf(e) }}
+								td {{ teamsLeadOf(e) }}

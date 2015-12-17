@@ -74,7 +74,7 @@ angular.module('app').controller 'memberDashboardCtrl', ['$scope', '$rootScope',
 	console.log "member: #{$rootScope.currentUser.username}"
 	console.log $rootScope.currentUser
 	console.log $scope.member
-	$scope.teams =  $scope.$meteorCollection () -> share.Teams.find {members: { $elemMatch: {_id: $scope.member._id}}}
+	$scope.teams =  $scope.$meteorCollection () -> share.Teams.find {$or: [{members: { $elemMatch: {_id: $scope.member._id}}}, {'lead._id': $scope.member._id}]}
 	$scope.requests =  $scope.$meteorCollection () -> share.Requests.find {memberRef: $scope.member._id, to: {$gt: new Date()} }
 	allRequests = $scope.$meteorCollection(share.Requests)
 	$scope.minDate = new Date()
